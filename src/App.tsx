@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import ProjectsPage from './pages/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 import { useScrollPosition } from './hooks/useScrollPosition';
 
-function App() {
+function HomePage() {
   const { activeSection } = useScrollPosition();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Set custom scrollbar styles
     document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Add mounted class for animations
     setIsMounted(true);
-
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
@@ -40,7 +38,6 @@ function App() {
       <Footer />
       <ScrollToTop />
       
-      {/* Custom Scrollbar - Only visible on desktop */}
       <style jsx global>{`
         ::-webkit-scrollbar {
           width: 10px;
@@ -66,6 +63,17 @@ function App() {
         }
       `}</style>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+      </Routes>
+    </Router>
   );
 }
 
