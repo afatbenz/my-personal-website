@@ -13,11 +13,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'MyTelkomsel',
             description: 'Mobile operator customer portal and self-service application with advanced features for account management, billing, and service customization. The platform serves millions of users daily with real-time updates and seamless integration with backend services.',
             techStack: ['React', 'Node.js', 'Express', 'MongoDB'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/Thumbnail.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/Thumbnail1.png',
-              'http://localhost:5173/Project/MyTelkomsel/Thumbnail2.png',
-              'http://localhost:5173/Project/MyTelkomsel/Thumbnail3.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail1.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail2.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail3.png'
             ],
             features: [
               'Real-time usage monitoring',
@@ -33,11 +33,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Dekkson Loyalty System',
             description: 'Customer loyalty and rewards management system designed to enhance customer engagement and retention. The platform includes point tracking, reward redemption, and personalized offers based on customer behavior.',
             techStack: ['PHP', 'MySQL', 'JavaScript', 'jQuery'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/NoPreview.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
             ],
             features: [
               'Points tracking system',
@@ -52,11 +52,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Dekkson ERP',
             description: 'Enterprise resource planning system for inventory and sales management, streamlining business operations and improving efficiency. The system provides comprehensive tools for managing various aspects of the business.',
             techStack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/NoPreview.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
             ],
             features: [
               'Inventory management',
@@ -71,11 +71,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Go-Commerce Builder',
             description: 'E-commerce platform builder and manager that enables businesses to create and manage their online stores with ease. The platform includes customizable templates and powerful management tools.',
             techStack: ['Go', 'React', 'PostgreSQL', 'Docker'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/NoPreview.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
             ],
             features: [
               'Store builder interface',
@@ -90,11 +90,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Live Integration Dashboard (LID)',
             description: 'Real-time data integration and visualization dashboard providing insights into system performance and business metrics. The dashboard offers customizable views and automated reporting.',
             techStack: ['Node.js', 'Express', 'Socket.io', 'MongoDB'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/NoPreview.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoIma',
-              'http://localhost:5173/Project/MyTelkomsel/NoIma'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoIma',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoIma'
             ],
             features: [
               'Real-time data visualization',
@@ -109,11 +109,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Go-Media',
             description: 'Media content management and distribution platform designed for efficient handling of digital assets. The system supports various media types and includes advanced search capabilities.',
             techStack: ['Go', 'React', 'AWS S3', 'PostgreSQL'],
-            thumbnail: 'http://localhost:5173/Project/MyTelkomsel/NoPreview.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png',
-              'http://localhost:5173/Project/MyTelkomsel/NoImage.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
             ],
             features: [
               'Media asset management',
