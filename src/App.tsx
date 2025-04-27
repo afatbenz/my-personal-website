@@ -16,7 +16,6 @@ import supabase from './helpers/supabaseClient';
 function HomePage() {
   const { activeSection } = useScrollPosition();
   const [isMounted, setIsMounted] = useState(false);
-  const [ipAddress, setIpAddress] = useState('');
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -31,61 +30,91 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 1. Fetch IP Address dulu
+        const getLocation = async () => {
+          const response = await fetch('https://ipapi.co/json/');
+          const data = await response.json();
+
+          return {
+            origin: `${data.city}, ${data.country_name}`,
+            location: `${data.latitude}, ${data.longitude}`,
+            organization: data.org,
+          };
+        };
+
+        const getOrigin = await getLocation();
+
+        // 1. Fetch IP Address
         const response = await fetch('https://api.ipify.org?format=json');
         const ipData = await response.json();
         const userIp = ipData.ip;
-        setIpAddress(userIp);
-  
-        // 2. Baru setelah IP ada, fetch visitor data
-        const { data, error } = await supabase
+
+        // 2. Cek apakah IP sudah ada di database
+        const { data: existingIps, error: fetchError } = await supabase
           .from('visitors')
-          .select('id, visits, ipaddress')
-          .limit(1)
-          .maybeSingle();
-  
-        if (error) {
-          console.error('Error fetching visitor count:', error);
+          .select('id, visits')
+          .eq('ipaddress', userIp);
+
+        if (fetchError) {
+          console.error('Error checking IP address:', fetchError);
           return;
         }
-  
-        if (!data) {
-          // Kalau belum ada data, insert baru
+
+        const now = new Date().toLocaleString();
+        if (!existingIps || existingIps.length === 0) {
+          // IP belum ada, insert baru
           const { error: insertError } = await supabase
             .from('visitors')
-            .insert([{ visits: 1, ipaddress: userIp }]);
-  
+            .insert([{
+              visits: 1,
+              ipaddress: userIp,
+              origin: getOrigin.origin,
+              location: getOrigin.location,
+              organization: getOrigin.organization,
+              lastvisit: now,
+            }]);
+
           if (insertError) {
-            console.error('Error inserting visitor count:', insertError);
+            console.error('Error inserting new visitor:', insertError);
             return;
           }
-  
-          setCount(1);
-          return;
+        } else {
+          // IP sudah ada, update visits +1
+          const { id, visits } = existingIps[0];
+          const newVisits = (visits || 0) + 1;
+
+          const { error: updateError } = await supabase
+            .from('visitors')
+            .update({ visits: newVisits, lastvisit: now })
+            .eq('id', id);
+
+          if (updateError) {
+            console.error('Error updating visits:', updateError);
+            return;
+          }
         }
-  
-        // Kalau sudah ada data, update visits + ipaddress
-        const currentCount = data.visits || 0;
-        const newCount = currentCount + 1;
-  
-        const { error: updateError } = await supabase
+
+        // 3. Setelah insert/update, ambil total visitors
+        const { data: allVisitors, error: totalError } = await supabase
           .from('visitors')
-          .update({ visits: newCount, ipaddress: userIp })  // ← ipAddress ikut diupdate
-          .eq('id', data.id);
-  
-        if (updateError) {
-          console.error('Error updating visitor count:', updateError);
+          .select('visits');
+
+        if (totalError) {
+          console.error('Error fetching total visitors:', totalError);
           return;
         }
-  
-        setCount(newCount);
+
+        const totalVisits = allVisitors.reduce((sum, record) => sum + (record.visits || 0), 0);
+
+        setCount(totalVisits);
+
       } catch (error) {
         console.error('Error fetching IP or visitor data:', error);
       }
     };
-  
+
     fetchData();
   }, []);
+  
 
   return (
     <div className={`min-h-screen bg-dark-800 text-gray-200 ${isMounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
