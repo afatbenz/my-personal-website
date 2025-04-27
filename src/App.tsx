@@ -11,10 +11,12 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 import { useScrollPosition } from './hooks/useScrollPosition';
+import supabase from './helpers/supabaseClient';
 
 function HomePage() {
   const { activeSection } = useScrollPosition();
   const [isMounted, setIsMounted] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -22,6 +24,53 @@ function HomePage() {
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchVisits = async () => {
+      const { data, error } = await supabase
+        .from('visitors')
+        .select('id, visits')
+        .limit(1)
+        .maybeSingle();
+  
+      if (error) {
+        console.error('Error fetching visitor count:', error);
+        return;
+      }
+  
+      if (!data) {
+        // Kalau belum ada data, langsung insert baru
+        const { error: insertError } = await supabase
+          .from('visitors')
+          .insert([{ visits: 1 }]);
+  
+        if (insertError) {
+          console.error('Error inserting visitor count:', insertError);
+          return;
+        }
+  
+        setCount(1);
+        return;
+      }
+  
+      const currentCount = data.visits || 0;
+      const newCount = currentCount + 1;
+  
+      const { error: updateError } = await supabase
+        .from('visitors')
+        .update({ visits: newCount })
+        .eq('id', data.id);
+  
+      if (updateError) {
+        console.error('Error updating visitor count:', updateError);
+        return;
+      }
+  
+      setCount(newCount);
+    };
+  
+    fetchVisits();
   }, []);
 
   return (
@@ -35,7 +84,7 @@ function HomePage() {
         <Projects />
         <Contact />
       </main>
-      <Footer />
+      <Footer visits={count} />
       <ScrollToTop />
       
       <style jsx global>{`
