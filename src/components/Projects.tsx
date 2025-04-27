@@ -49,7 +49,7 @@ const Projects: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map(project => (
+            {projects?.slice(0,6).map(project => (
               <ProjectCard 
                 key={project.id} 
                 project={project} 
@@ -59,16 +59,15 @@ const Projects: React.FC = () => {
           </div>
         )}
 
-        {/* <div className="mt-12 text-center">
+        <div className="mt-12 text-center">
           <a 
-            href="https://github.com/afatbenz" 
-            target="_blank" 
+            href="/projects" 
             rel="noopener noreferrer" 
             className="inline-block px-6 py-3 border border-primary-500 text-primary-400 rounded-md hover:bg-primary-500 hover:bg-opacity-10 transition-all"
           >
             View More Projects
           </a>
-        </div> */}
+        </div>
       </div>
 
       {selectedProject && (
