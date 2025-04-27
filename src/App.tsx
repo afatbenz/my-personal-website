@@ -16,6 +16,7 @@ import supabase from './helpers/supabaseClient';
 function HomePage() {
   const { activeSection } = useScrollPosition();
   const [isMounted, setIsMounted] = useState(false);
+  const [ipAddress, setIpAddress] = useState('');
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -24,53 +25,66 @@ function HomePage() {
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
+    
   }, []);
 
   useEffect(() => {
-    const fetchVisits = async () => {
-      const { data, error } = await supabase
-        .from('visitors')
-        .select('id, visits')
-        .limit(1)
-        .maybeSingle();
+    const fetchData = async () => {
+      try {
+        // 1. Fetch IP Address dulu
+        const response = await fetch('https://api.ipify.org?format=json');
+        const ipData = await response.json();
+        const userIp = ipData.ip;
+        setIpAddress(userIp);
   
-      if (error) {
-        console.error('Error fetching visitor count:', error);
-        return;
-      }
-  
-      if (!data) {
-        // Kalau belum ada data, langsung insert baru
-        const { error: insertError } = await supabase
+        // 2. Baru setelah IP ada, fetch visitor data
+        const { data, error } = await supabase
           .from('visitors')
-          .insert([{ visits: 1 }]);
+          .select('id, visits, ipaddress')
+          .limit(1)
+          .maybeSingle();
   
-        if (insertError) {
-          console.error('Error inserting visitor count:', insertError);
+        if (error) {
+          console.error('Error fetching visitor count:', error);
           return;
         }
   
-        setCount(1);
-        return;
+        if (!data) {
+          // Kalau belum ada data, insert baru
+          const { error: insertError } = await supabase
+            .from('visitors')
+            .insert([{ visits: 1, ipaddress: userIp }]);
+  
+          if (insertError) {
+            console.error('Error inserting visitor count:', insertError);
+            return;
+          }
+  
+          setCount(1);
+          return;
+        }
+  
+        // Kalau sudah ada data, update visits + ipaddress
+        const currentCount = data.visits || 0;
+        const newCount = currentCount + 1;
+  
+        const { error: updateError } = await supabase
+          .from('visitors')
+          .update({ visits: newCount, ipaddress: userIp })  // ← ipAddress ikut diupdate
+          .eq('id', data.id);
+  
+        if (updateError) {
+          console.error('Error updating visitor count:', updateError);
+          return;
+        }
+  
+        setCount(newCount);
+      } catch (error) {
+        console.error('Error fetching IP or visitor data:', error);
       }
-  
-      const currentCount = data.visits || 0;
-      const newCount = currentCount + 1;
-  
-      const { error: updateError } = await supabase
-        .from('visitors')
-        .update({ visits: newCount })
-        .eq('id', data.id);
-  
-      if (updateError) {
-        console.error('Error updating visitor count:', updateError);
-        return;
-      }
-  
-      setCount(newCount);
     };
   
-    fetchVisits();
+    fetchData();
   }, []);
 
   return (

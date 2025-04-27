@@ -53,65 +53,71 @@ export const projects: Project[] = [
     title: 'MyTelkomsel',
     description: 'Mobile operator customer portal and self-service application',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB'],
-    thumbnail: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   },
   {
     id: 2,
     title: 'Dekkson Loyalty System',
     description: 'Customer loyalty and rewards management system',
     techStack: ['PHP', 'MySQL', 'JavaScript', 'jQuery'],
-    thumbnail: 'https://images.pexels.com/photos/6224/hands-people-woman-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/6224/hands-people-woman-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   },
   {
     id: 3,
     title: 'Dekkson ERP',
     description: 'Enterprise resource planning system for inventory and sales management',
     techStack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-    thumbnail: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   },
   {
     id: 4,
     title: 'Go-Commerce Builder',
     description: 'E-commerce platform builder and manager',
     techStack: ['Go', 'React', 'PostgreSQL', 'Docker'],
-    thumbnail: 'https://images.pexels.com/photos/6568911/pexels-photo-6568911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/6568911/pexels-photo-6568911.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   },
   {
     id: 5,
     title: 'Live Integration Dashboard (LID)',
     description: 'Real-time data integration and visualization dashboard',
     techStack: ['Node.js', 'Express', 'Socket.io', 'MongoDB'],
-    thumbnail: 'https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   },
   {
     id: 6,
     title: 'Go-Media',
     description: 'Media content management and distribution platform',
     techStack: ['Go', 'React', 'AWS S3', 'PostgreSQL'],
-    thumbnail: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    thumbnail: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
   }
 ];
 
 export const skills: Skill[] = [
   {
     category: 'Programming Languages',
-    items: ['PHP', 'JavaScript (Node.js, Express)', 'TypeScript', 'Go (Gin)']
+    items: ['PHP', 'ExpressJS', 'NodeJS', 'TypeScript', 'ReactJS', 'NextJS', 'Go (Gin)', 'Go (Fiber)', 'CSS', 'HTML']
   },
   {
-    category: 'Frontend',
-    items: ['React', 'Next.js', 'Hapi.js', 'HTML/CSS']
+    category: 'Database & Caching',
+    items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Supabase', 'Redis']
   },
   {
-    category: 'Database',
-    items: ['MySQL', 'MongoDB', 'Redis']
-  },
-  {
-    category: 'Cloud & DevOps',
-    items: ['AWS (EKS, EC2, ECR)', 'Kubernetes', 'Docker', 'CI/CD (Jenkins, GitLab CI)']
+    category: 'CI/CD, Cloud & DevOps',
+    items: ['AWS (EKS, EC2, ECR)', 'Kubernetes', 'Docker', 'Jenkins', 'GitLab', 'GitHub']
   },
   {
     category: 'Testing & Monitoring',
     items: ['Jest', 'Mocha', 'Splunk', 'Postman', 'SonarQube']
+  },
+  {
+    category: 'Collaboration Tools',
+    items: ['Trello', 'Notion', 'Jira', 'Confluence']
   }
 ];
 

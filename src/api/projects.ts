@@ -12,7 +12,7 @@ export async function fetchProjects(): Promise<Project[]> {
             id: 1,
             title: 'MyTelkomsel',
             description: 'Mobile operator customer portal and self-service application with advanced features for account management, billing, and service customization. The platform serves millions of users daily with real-time updates and seamless integration with backend services.',
-            techStack: ['React', 'Node.js', 'Express', 'MongoDB'],
+            techStack: ['ReactJS', 'Node.js', 'Expressjs', 'Hapijs', 'MongoDB', 'Amazone EKS', 'Amazone S3', 'Amazone ECR', 'Amazone EFS', 'Jenkins', 'Kubernetes', 'Docker'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail1.png',
@@ -23,8 +23,9 @@ export async function fetchProjects(): Promise<Project[]> {
               'Real-time usage monitoring',
               'Bill payment integration',
               'Package subscription management',
-              'Customer support chat',
-              'Service activation/deactivation'
+              'Grapari Online Service',
+              'Service activation/deactivation',
+              'etc'
             ],
             demoUrl: 'https://my.telkomsel.com'
           },
@@ -32,7 +33,7 @@ export async function fetchProjects(): Promise<Project[]> {
             id: 2,
             title: 'Dekkson Loyalty System',
             description: 'Customer loyalty and rewards management system designed to enhance customer engagement and retention. The platform includes point tracking, reward redemption, and personalized offers based on customer behavior.',
-            techStack: ['PHP', 'MySQL', 'JavaScript', 'jQuery'],
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'jQuery'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
@@ -51,7 +52,7 @@ export async function fetchProjects(): Promise<Project[]> {
             id: 3,
             title: 'Dekkson ERP',
             description: 'Enterprise resource planning system for inventory and sales management, streamlining business operations and improving efficiency. The system provides comprehensive tools for managing various aspects of the business.',
-            techStack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'Bootstrap'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
@@ -64,13 +65,14 @@ export async function fetchProjects(): Promise<Project[]> {
               'Purchase order processing',
               'Financial reporting',
               'Employee management'
-            ]
+            ],
+            demoUrl: 'https://erp.dekkson.com'
           },
           {
             id: 4,
             title: 'Go-Commerce Builder',
             description: 'E-commerce platform builder and manager that enables businesses to create and manage their online stores with ease. The platform includes customizable templates and powerful management tools.',
-            techStack: ['Go', 'React', 'PostgreSQL', 'Docker'],
+            techStack: ['Go', 'NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'Docker'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
@@ -89,7 +91,7 @@ export async function fetchProjects(): Promise<Project[]> {
             id: 5,
             title: 'Live Integration Dashboard (LID)',
             description: 'Real-time data integration and visualization dashboard providing insights into system performance and business metrics. The dashboard offers customizable views and automated reporting.',
-            techStack: ['Node.js', 'Express', 'Socket.io', 'MongoDB'],
+            techStack: ['Node.js', 'Express', 'Go', 'Socket.io', 'MongoDB', 'MySQL', 'ReactJS'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
@@ -108,7 +110,7 @@ export async function fetchProjects(): Promise<Project[]> {
             id: 6,
             title: 'Go-Media',
             description: 'Media content management and distribution platform designed for efficient handling of digital assets. The system supports various media types and includes advanced search capabilities.',
-            techStack: ['Go', 'React', 'AWS S3', 'PostgreSQL'],
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL'],
             thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
             images: [
               'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
@@ -122,6 +124,45 @@ export async function fetchProjects(): Promise<Project[]> {
               'Version control',
               'Automated workflows'
             ]
+          },
+          {
+            id: 7,
+            title: 'eGoGo Hub ERP',
+            description: 'Egogohub ERP is an internal enterprise platform owned by eGoGo Hub Indonesia, designed to simplify business processes and support employee needs.',
+            techStack: ['PHP Native', 'Dolibarr', 'Bootstrap', 'MySQL', 'JQuery'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
+            images: [
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
+            ],
+            features: [
+              'User & employee Management',
+              'Attendance Tracking',
+              'Timesheet Management',
+              'Warehouse & Fulfillment Management',
+              'Finance & Accounting',
+              'etc'
+            ],
+            demoUrl: 'https://erp.egogohub.com'
+          },
+          {
+            id: 8,
+            title: 'eGoGo Hub Company Profile',
+            description: 'This is a company profile platform used to introduce the company to the public.',
+            techStack: ['PHP Native', 'Bootstrap', 'MySQL', 'Javascript', 'JQuery'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/NoPreview.png',
+            images: [
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/NoImage.png'
+            ],
+            features: [
+              'Profile Company',
+              'Job Vacancy',
+              'Contact',
+            ],
+            demoUrl: 'https://www.egogohub.com'
           }
         ]);
       }, 1000);

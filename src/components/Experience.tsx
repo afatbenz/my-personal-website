@@ -6,7 +6,7 @@ const Experience: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="experience" className="h-screen py-20 bg-dark-800">
+    <section id="experience" className="h-screen py-20 bg-dark-800 overflow-x-auto">
       <div className="container px-4 mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Work Experience</h2>

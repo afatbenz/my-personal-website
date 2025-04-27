@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Server, Database, GitBranch, Briefcase } from 'lucide-react';
+import { Code, Server, Database, GitBranch, Briefcase, ShieldCheck, MessageCircle } from 'lucide-react';
 import { skills } from '../data/profileData';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -14,6 +14,10 @@ const About: React.FC = () => {
         return <Database className="text-green-400" size={24} />;
       case 'Cloud & DevOps':
         return <Server className="text-orange-400" size={24} />;
+      case 'Testing & Monitoring':
+        return <ShieldCheck className="text-blue-400" size={24} />;
+      case 'Collaboration Tools':
+        return <MessageCircle className="text-purple-400" size={24} />;
       default:
         return <GitBranch className="text-pink-400" size={24} />;
     }
@@ -48,7 +52,7 @@ const About: React.FC = () => {
                 <h3 className="text-xl font-semibold">Professional Summary</h3>
               </div>
               <p className="text-gray-300 pl-9">
-                With over 7 years of software development experience, I've led teams, built API services, 
+                With over 6 years of software development experience, I've led teams, built API services, 
                 optimized performance, and ensured high-quality code across multiple projects. I specialize in 
                 backend systems but have experience across the full development stack.
               </p>
