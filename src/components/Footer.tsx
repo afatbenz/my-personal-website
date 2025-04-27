@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-scroll';
 import { Github as GitHub, Linkedin, Twitter, ArrowUp, Instagram } from 'lucide-react';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ visits: number }> = ({ visits }) => {
   return (
     <footer className="bg-dark-900 pt-12 pb-8">
       <div className="container px-4 mx-auto">
@@ -54,6 +54,9 @@ const Footer: React.FC = () => {
             </p>
             <p className="text-gray-600 text-xs mt-1">
               Built with React, TypeScript, and Tailwind CSS
+            </p>
+            <p className="text-gray-600 text-xs mt-1">
+              Visitors: {visits}
             </p>
           </div>
         </div>
