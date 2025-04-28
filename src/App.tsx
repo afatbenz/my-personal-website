@@ -103,7 +103,7 @@ function HomePage() {
           return;
         }
 
-        const totalVisits = allVisitors.reduce((sum, record) => sum + (record.visits || 0), 0);
+        const totalVisits = allVisitors.reduce((sum: number, record: any) => sum + (record.visits || 0), 0);
 
         setCount(totalVisits);
 
