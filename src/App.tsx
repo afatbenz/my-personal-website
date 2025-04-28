@@ -30,37 +30,41 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // 1. Fetch IP Address
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        const userIp = ipData.ip;
+  
+        // 2. Fetch Location Info
         const getLocation = async () => {
           const response = await fetch('https://ipapi.co/json/');
           const data = await response.json();
-
           return {
             origin: `${data.city}, ${data.country_name}`,
             location: `${data.latitude}, ${data.longitude}`,
             organization: data.org,
           };
         };
-
+  
         const getOrigin = await getLocation();
-
-        // 1. Fetch IP Address
-        const response = await fetch('https://api.ipify.org?format=json');
-        const ipData = await response.json();
-        const userIp = ipData.ip;
-
-        // 2. Cek apakah IP sudah ada di database
+  
+        // 3. Cek apakah IP sudah ada di database
         const { data: existingIps, error: fetchError } = await supabase
           .from('visitors')
           .select('id, visits')
-          .eq('ipaddress', userIp);
-
-        if (fetchError) {
+          .eq('ipaddress', userIp)
+          .single(); // ambil 1 saja
+  
+        const now = getOrigin.origin.includes('Indonesia')
+          ? new Date(Date.now() + (7 * 60 * 60 * 1000)).toISOString()
+          : new Date().toISOString();
+  
+        if (fetchError && fetchError.code !== 'PGRST116') {
           console.error('Error checking IP address:', fetchError);
           return;
         }
-
-        const now = new Date().toLocaleString();
-        if (!existingIps || existingIps.length === 0) {
+  
+        if (!existingIps) {
           // IP belum ada, insert baru
           const { error: insertError } = await supabase
             .from('visitors')
@@ -72,48 +76,55 @@ function HomePage() {
               organization: getOrigin.organization,
               lastvisit: now,
             }]);
-
+  
           if (insertError) {
             console.error('Error inserting new visitor:', insertError);
             return;
           }
         } else {
-          // IP sudah ada, update visits +1
-          const { id, visits } = existingIps[0];
-          const newVisits = (visits || 0) + 1;
-
+          // IP sudah ada, update lastvisit, origin, location
+          const newVisits = (existingIps.visits || 0) + 1;
+  
           const { error: updateError } = await supabase
             .from('visitors')
-            .update({ visits: newVisits, lastvisit: now })
-            .eq('id', id);
-
+            .update({
+              visits: newVisits,
+              lastvisit: now,
+              origin: getOrigin.origin,
+              location: getOrigin.location,
+            })
+            .eq('id', existingIps.id);
+  
           if (updateError) {
-            console.error('Error updating visits:', updateError);
+            console.error('Error updating visitor:', updateError);
             return;
           }
         }
-
-        // 3. Setelah insert/update, ambil total visitors
+  
+        // 4. Setelah insert/update, ambil total visitors
         const { data: allVisitors, error: totalError } = await supabase
           .from('visitors')
           .select('visits');
-
+  
         if (totalError) {
           console.error('Error fetching total visitors:', totalError);
           return;
         }
-
-        const totalVisits = allVisitors.reduce((sum: number, record: any) => sum + (record.visits || 0), 0);
-
+  
+        const totalVisits = allVisitors.reduce(
+          (sum: number, record: any) => sum + (record.visits || 0),
+          0
+        );
+  
         setCount(totalVisits);
-
+  
       } catch (error) {
         console.error('Error fetching IP or visitor data:', error);
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, []);  
   
 
   return (
