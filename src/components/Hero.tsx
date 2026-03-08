@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-12 bg-gradient-to-b from-dark-900/90 to-dark-800/90">
-      <ParticlesBackground  />
+      <ParticlesBackground id="hero-particles" />
       
       <div className="container px-4 mx-auto z-10 flex flex-col items-center text-center">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 text-white">
@@ -46,11 +46,9 @@ const Hero: React.FC = () => {
             sequence={[
               'Software Engineer',
               2000,
-              'Fullstack Developer',
+              'Backend Developer',
               2000,
-              'Backend Specialist',
-              2000,
-              'Development Team Lead',
+              'Fullstack Engineer',
               2000,
             ]}
             wrapper="h2"
@@ -61,9 +59,8 @@ const Hero: React.FC = () => {
         </div>
         
         <p className="text-lg max-w-xl text-gray-300 mb-8 animate-fade-in">
-          Experienced Fullstack Developer specializing in backend development
-          with PHP, JavaScript, and Go. Skilled in designing scalable microservices
-          and optimizing database performance.
+          Software Engineer with 7+ years of experience building scalable back-end systems and enterprise applications.
+          Specialized in designing high-performance APIs, microservices architecture, and database optimization.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 mt-6">

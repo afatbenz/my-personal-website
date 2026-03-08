@@ -3,20 +3,23 @@ import { Particles } from 'react-tsparticles';
 import type { Engine } from 'tsparticles-engine';
 import { loadSlim } from "tsparticles-slim";
 
-const ParticlesBackground = () => {
+interface ParticlesBackgroundProps {
+  id?: string;
+}
+
+const ParticlesBackground = ({ id = "tsparticles" }: ParticlesBackgroundProps) => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
 
   return (
     <Particles
-      id="tsparticles"
+      id={id}
       init={particlesInit}
-      className="absolute inset-0 -z-10 w-full h-full"
+      className="absolute inset-0 w-full h-full"
       options={{
         fullScreen: {
-          enable: true,
-          zIndex: -1
+          enable: false,
         },
         background: {
           color: {
@@ -24,19 +27,38 @@ const ParticlesBackground = () => {
           },
         },
         fpsLimit: 120,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "grab",
+              parallax: {
+                enable: true,
+                force: 60,
+                smooth: 10
+              }
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              links: {
+                opacity: 0.5
+              }
+            }
+          }
+        },
         particles: {
           color: {
-            value: "#FFF",
+            value: "#0ea5e9", // primary-500
           },
           links: {
-            color: "#FFF",
+            color: "#ffffff",
             distance: 150,
             enable: true,
             opacity: 0.2,
             width: 1,
-          },
-          collisions: {
-            enable: true,
           },
           move: {
             direction: "none",
@@ -53,10 +75,10 @@ const ParticlesBackground = () => {
               enable: true,
               area: 800,
             },
-            value: 80,
+            value: 40, // Reduced from 80 for simpler look
           },
           opacity: {
-            value: 0.2,
+            value: 0.3,
           },
           shape: {
             type: "circle",
@@ -66,28 +88,6 @@ const ParticlesBackground = () => {
           },
         },
         detectRetina: true,
-        interactivity: {
-          events: {
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-            onHover: {
-              enable: true,
-              mode: "repulse",
-            },
-            resize: true,
-          },
-          modes: {
-            push: {
-              quantity: 4,
-            },
-            repulse: {
-              distance: 200,
-              duration: 0.4,
-            },
-          },
-        },
       }}
     />
   );

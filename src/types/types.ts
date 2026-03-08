@@ -17,6 +17,8 @@ export interface Experience {
   location: string;
   period: string;
   responsibilities: string[];
+  projects?: string;
+  techStack?: string;
 }
 
 export interface Skill {

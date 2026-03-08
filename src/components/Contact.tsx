@@ -2,6 +2,7 @@ import React from 'react';
 import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/profileData';
+import ParticlesBackground from './ParticlesBackground';
 
 const Contact: React.FC = () => {
   const contactItems = [
@@ -52,8 +53,9 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-dark-800">
-      <div className="container px-4 mx-auto">
+    <section id="contact" className="py-20 bg-dark-800 relative overflow-hidden">
+      <ParticlesBackground id="contact-particles" />
+      <div className="container px-4 mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
