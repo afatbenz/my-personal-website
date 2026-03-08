@@ -3,61 +3,89 @@ import { Experience, Project, Skill } from '../types/types';
 export const experiences: Experience[] = [
   {
     id: 1,
-    role: 'Development Team Lead',
-    company: 'PT. Phincon',
-    location: 'Surakarta & Jakarta, Indonesia',
-    period: '04/2023 - 04/2025',
+    role: 'Software Engineer',
+    company: 'PT. Bithealth',
+    location: 'Tangerang, Indonesia',
+    period: 'Jul 2025 - Apr 2026',
     responsibilities: [
-      'Led a team of 10 developers to deliver API services and web UI',
-      'Ensured development adhered to timelines and managed resources effectively',
-      'Monitored and resolved production issues across 20+ running services, ensuring system stability',
-      'Spearheaded documentation efforts (MOP, deployment logs, pentest reports)',
-      'Led performance optimization efforts, achieving 100% NFT compliance',
-      'Ensured all production code resolved pentest issues, improving security compliance',
-      'Managed deployments for 30+ microservices, ensuring zero downtime releases',
-      'Served as a liaison between users, product owners, and developers for feature requests'
-    ]
+      'Troubleshoot and resolve production issues through root cause analysis, improving system stability and reducing recurring incidents',
+      'Improve API performance by optimizing inefficient queries and resolving N+1 query problems',
+      'Refactor legacy code following clean architecture and engineering best practices',
+      'Implement backend and frontend improvements including bug fixes and feature enhancements',
+      'Improve system observability by enhancing application logging and monitoring',
+      'Improved API response time by up to 70% through database query optimization'
+    ],
+    projects: 'Siloam Hospitals (frontoffice, kairos, payment, queue management, opdadmin)',
+    techStack: 'Angular, React, Express.js, Typescript, .NET, SQL Server (MSSQL), PostgreSQL, Kibana'
   },
   {
     id: 2,
-    role: 'Fullstack Developer',
+    role: 'Web Development Team Lead',
     company: 'PT. Phincon',
-    location: 'Surakarta & Jakarta, Indonesia',
-    period: '11/2021 - Present',
+    location: 'Jakarta, Indonesia',
+    period: 'Apr 2023 - Apr 2025',
     responsibilities: [
-      'Develop and maintain API services with clean, tested code and proper documentation',
-      'Collaborate on deployments and oversee testing (SIT, UAT, Regression, FUT, NFT)',
-      'Conduct performance testing and resolve production issues efficiently',
-      'Ensured 80%+ unit test coverage positively impacted the development process'
-    ]
+      'Led a 10-member team delivering high-performance and scalable API services for 30+ Telkomsel applications',
+      'Ensured high system reliability and achieved 100% SLA compliance during Non-Functional Testing',
+      'Collaborated with Product Owners, QA, and DevOps teams to ensure stable production releases',
+      'Implemented engineering standards, documentation practices, and development workflows to improve productivity',
+      'Managed sprint planning, team capacity, and backlog prioritization to maintain consistent delivery performance',
+      'Mentored junior developers and conducted technical reviews to maintain code quality'
+    ],
+    projects: 'MyTelkomsel Web',
+    techStack: 'Hapi.js, Express.js, React, MySQL, Redis, AWS, Docker, Jenkins, Jira'
   },
   {
     id: 3,
-    role: 'IT Programmer',
-    company: 'PT. EGoGo Hub Indonesia',
+    role: 'Fullstack Developer',
+    company: 'PT. Phincon',
     location: 'Jakarta, Indonesia',
-    period: '10/2018 - 10/2021',
+    period: 'Nov 2021 - Jul 2025',
     responsibilities: [
-      'Built and maintained ERP systems and company profile websites for internal and client needs',
-      'Led the development team through the software development lifecycle',
-      'Analyzed user needs, provided solutions, and designed databases based on project requirements',
-      'Supported UAT processes and resolved production issues efficiently',
-      'Developed and maintained 7 projects for internal company and corporate clients'
-    ]
+      'Developed and maintained scalable API services for Telkomsel enterprise systems',
+      'Collaborated with QA and DevOps teams across SIT, UAT, regression, functional, and non-functional testing',
+      'Built automated unit tests achieving 80%+ coverage to improve code quality and system reliability',
+      'Optimized backend services and database queries to achieve sub-second API response times'
+    ],
+    projects: 'MyTelkomsel Web, MyTelkomsel Apps, MyTelkomsel Lite',
+    techStack: 'Hapi.js, Express.js, React, MySQL, Redis, AWS, Docker, Jenkins, Jira'
+  },
+  {
+    id: 4,
+    role: 'IT Developer',
+    company: 'PT. eGoGo Hub Indonesia',
+    location: 'Jakarta, Indonesia',
+    period: 'Oct 2018 - Oct 2021',
+    responsibilities: [
+      'Built and maintained ERP systems and corporate websites',
+      'Translated business requirements into scalable, database-driven applications',
+      'Delivered client-facing solutions and supported production systems used in daily business operations',
+      'Improved internal workflows and resolved production issues to support business operations'
+    ],
+    projects: 'eGoGo Web & ERP, Dekkson ERP & Loyalty, Hattan Intl, Go-Commerce Builder, Live Integration Dashboard (LID)',
+    techStack: 'PHP Native, Express.js, React, Go, Dolibarr, MySQL'
   }
 ];
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'MyTelkomsel',
-    description: 'Mobile operator customer portal and self-service application',
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB'],
+    title: 'MyTelkomsel Digital World',
+    description: 'A large-scale digital ecosystem consisting of three main platforms: MyTelkomsel Web, MyTelkomsel App, and MyTelkomsel Lite, serving millions of Telkomsel users across Indonesia.',
+    techStack: ['Hapi.js', 'Express.js', 'React', 'MySQL', 'Redis', 'AWS', 'Docker', 'Jenkins'],
     thumbnail: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     images: []
   },
   {
     id: 2,
+    title: 'Siloam Mobility',
+    description: 'Digital healthcare platform. Focused on resolving production issues, optimizing backend API performance, and refactoring legacy code to improve system stability.',
+    techStack: ['Angular', 'React', 'Express.js', 'Typescript', '.NET', 'SQL Server', 'PostgreSQL'],
+    thumbnail: 'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    images: []
+  },
+  {
+    id: 3,
     title: 'Dekkson Loyalty System',
     description: 'Customer loyalty and rewards management system',
     techStack: ['PHP', 'MySQL', 'JavaScript', 'jQuery'],
@@ -65,7 +93,7 @@ export const projects: Project[] = [
     images: []
   },
   {
-    id: 3,
+    id: 4,
     title: 'Dekkson ERP',
     description: 'Enterprise resource planning system for inventory and sales management',
     techStack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
@@ -73,7 +101,7 @@ export const projects: Project[] = [
     images: []
   },
   {
-    id: 4,
+    id: 5,
     title: 'Go-Commerce Builder',
     description: 'E-commerce platform builder and manager',
     techStack: ['Go', 'React', 'PostgreSQL', 'Docker'],
@@ -81,51 +109,43 @@ export const projects: Project[] = [
     images: []
   },
   {
-    id: 5,
+    id: 6,
     title: 'Live Integration Dashboard (LID)',
     description: 'Real-time data integration and visualization dashboard',
     techStack: ['Node.js', 'Express', 'Socket.io', 'MongoDB'],
     thumbnail: 'https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    images: []
-  },
-  {
-    id: 6,
-    title: 'Go-Media',
-    description: 'Media content management and distribution platform',
-    techStack: ['Go', 'React', 'AWS S3', 'PostgreSQL'],
-    thumbnail: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     images: []
   }
 ];
 
 export const skills: Skill[] = [
   {
-    category: 'Programming Languages',
-    items: ['PHP', 'ExpressJS', 'NodeJS', 'TypeScript', 'ReactJS', 'NextJS', 'Go (Gin)', 'Go (Fiber)', 'CSS', 'HTML']
+    category: 'Backend Engineering',
+    items: ['Node.js', 'Go', 'PHP', 'TypeScript', 'REST API', 'Micro-services']
   },
   {
-    category: 'Database & Caching',
-    items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Supabase', 'Redis']
+    category: 'Frontend Development',
+    items: ['React', 'Angular', 'HTML', 'CSS']
   },
   {
-    category: 'CI/CD, Cloud & DevOps',
-    items: ['AWS (EKS, EC2, ECR)', 'Kubernetes', 'Docker', 'Jenkins', 'GitLab', 'GitHub']
+    category: 'Databases & Caching',
+    items: ['MySQL', 'PostgreSQL', 'MongoDB', 'SQL Server', 'Redis']
   },
   {
-    category: 'Testing & Monitoring',
-    items: ['Jest', 'Mocha', 'Splunk', 'Postman', 'SonarQube']
+    category: 'Cloud & Infrastructure',
+    items: ['AWS (EKS, EC2, ECR)', 'Docker', 'Kubernetes', 'CI/CD']
   },
   {
-    category: 'Collaboration Tools',
-    items: ['Trello', 'Notion', 'Jira', 'Confluence']
+    category: 'Testing & Observability',
+    items: ['Jest', 'Mocha', 'SonarQube', 'Kibana', 'Splunk']
   }
 ];
 
 export const personalInfo = {
   name: "Muhammad Nurdin Mafatichul Fuadi",
-  title: "Software Engineer",
-  location: "Jakarta, Indonesia",
+  title: "Backend Developer • Fullstack Engineer • Software Engineer",
+  location: "Yogyakarta, Indonesia",
   email: "mafatichulfuadi@gmail.com",
-  phone: "+62 813-3588-4729",
+  phone: "+62-8133-5884-729",
   linkedin: "https://www.linkedin.com/in/mafatichulfuadi"
 };

@@ -6,7 +6,7 @@ const Experience: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="experience" className="h-screen py-20 bg-dark-800 overflow-x-auto">
+    <section id="experience" className="min-h-[80vh] md:min-h-screen py-20 bg-dark-800 overflow-x-hidden">
       <div className="container px-4 mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Work Experience</h2>
@@ -42,8 +42,8 @@ const Experience: React.FC = () => {
                 }`}
                 onClick={() => setActiveTab(index)}
               >
-                <span className="block font-medium">{exp.company}</span>
-                <span className="block text-sm opacity-75">{exp.role}</span>
+                <span className="block font-medium">{exp.role}</span>
+                <span className="block text-sm opacity-75">{exp.company}</span>
               </button>
             ))}
           </div>
@@ -80,6 +80,23 @@ const Experience: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+
+                {(exp.projects || exp.techStack) && (
+                  <div className="mt-6 pt-4 border-t border-dark-600">
+                    {exp.projects && (
+                      <div className="mb-3">
+                        <span className="text-primary-400 font-semibold block mb-1">Project:</span>
+                        <span className="text-gray-300 italic">{exp.projects}</span>
+                      </div>
+                    )}
+                    {exp.techStack && (
+                      <div>
+                        <span className="text-primary-400 font-semibold block mb-1">Tech Stack:</span>
+                        <span className="text-gray-300 font-mono text-sm bg-dark-800 px-2 py-1 rounded inline-block">{exp.techStack}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>

@@ -1,27 +1,36 @@
 import React from 'react';
-import { Code, Server, Database, GitBranch, Briefcase, ShieldCheck, MessageCircle } from 'lucide-react';
+import { Code, Server, Database, GitBranch, Briefcase } from 'lucide-react';
 import { skills } from '../data/profileData';
-import { TypeAnimation } from 'react-type-animation';
 
 const About: React.FC = () => {
   const getIconForCategory = (category: string) => {
     switch (category) {
-      case 'Programming Languages':
-        return <Code className="text-primary-400" size={24} />;
-      case 'Frontend':
+      case 'Backend Engineering':
+        return <Server className="text-primary-400" size={24} />;
+      case 'Frontend Development':
         return <Code className="text-secondary-400" size={24} />;
-      case 'Database & Caching':
+      case 'Databases & Caching':
         return <Database className="text-green-400" size={24} />;
-      case 'Cloud & DevOps':
-        return <Server className="text-orange-400" size={24} />;
-      case 'Testing & Monitoring':
-        return <ShieldCheck className="text-blue-400" size={24} />;
-      case 'Collaboration Tools':
-        return <MessageCircle className="text-purple-400" size={24} />;
+      case 'Cloud & Infrastructure':
+        return <GitBranch className="text-orange-400" size={24} />;
+      case 'Testing & Observability':
+        return <Briefcase className="text-pink-400" size={24} />;
       default:
         return <GitBranch className="text-pink-400" size={24} />;
     }
   };
+
+  const totalYears = 7;
+  const programmingExperience = [
+    { language: 'Node.js', years: 6 },
+    { language: 'Go', years: 2 },
+    { language: 'PHP', years: 3 },
+    { language: 'TypeScript', years: 4 },
+    { language: 'React', years: 4 },
+    { language: 'Angular', years: 0.8 },
+    { language: 'SQL Database', years: 7 },
+    { language: 'NoSQL Database', years: 1 },
+  ];
 
   return (
     <section id="about" className="py-20 bg-dark-900">
@@ -29,19 +38,13 @@ const About: React.FC = () => {
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
           <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-          <div className="max-w-3xl mx-auto text-gray-300 text-lg">
-          <TypeAnimation
-            sequence={[
-              'Experienced Fullstack Developer specializing in backend development with PHP, JavaScript (Node.js, Express.js, Hapi.js, Next.js), and Go (Gin). Skilled in designing scalable microservices, optimizing database performance (MySQL, MongoDB, Redis), and ensuring smooth deployments. Experienced in running Jenkins pipelines for CI/CD, and monitoring services using Kubernetes, EFS, and ECR. Passionate about clean code, system reliability, and continuously learning new technologies.',
-              2000,
-            ]}
-            wrapper="h2"
-            speed={50}
-            repeat={Infinity}
-            className=""
-          />
-          </div>
-
+          <p className="max-w-3xl mx-auto text-gray-300 text-lg">
+            Software Engineer with 7+ years of experience building scalable back-end systems and enterprise
+            applications across telecom and healthcare digital platforms. Specialized in designing high-performance
+            APIs, microservices architecture, and database optimization. Experienced in leading engineering teams in
+            large-scale digital platforms, improving system reliability, and delivering production-grade systems for
+            high-traffic applications used by millions of active users.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -52,36 +55,30 @@ const About: React.FC = () => {
                 <h3 className="text-xl font-semibold">Professional Summary</h3>
               </div>
               <p className="text-gray-300 pl-9">
-                With over 6 years of software development experience, I've led teams, built API services, 
-                optimized performance, and ensured high-quality code across multiple projects. I specialize in 
-                backend systems but have experience across the full development stack.
+                With 7+ years of experience, I specialize in Backend Engineering (Node.js, Go, PHP) and have a strong
+                background in Frontend Development, Databases, Cloud Infrastructure, and Observability. I have successfully
+                led teams, optimized high-traffic systems, and ensured 100% SLA compliance.
               </p>
             </div>
 
             <div className="p-6 bg-dark-800 rounded-lg shadow-lg border border-dark-700 hover:border-primary-800 transition-all">
-              <h3 className="text-xl font-semibold mb-4">Core Strengths</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mr-3"></span>
-                  <span>Microservices Architecture</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mr-3"></span>
-                  <span>API Development & Integration</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mr-3"></span>
-                  <span>Database Optimization</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mr-3"></span>
-                  <span>Team Leadership</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mr-3"></span>
-                  <span>CI/CD & DevOps Practices</span>
-                </li>
-              </ul>
+              <h3 className="text-xl font-semibold mb-6">Programming Languages & Databases</h3>
+              <div className="space-y-4">
+                {programmingExperience.map((lang, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-300">{lang.language}</span>
+                      <span className="text-primary-400">{lang.years} years</span>
+                    </div>
+                    <div className="w-full h-2 bg-dark-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-primary-500 rounded-full transition-all duration-500"
+                        style={{ width: `${(lang.years / totalYears) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
