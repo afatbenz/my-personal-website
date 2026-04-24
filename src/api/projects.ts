@@ -94,11 +94,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Go-Commerce Builder',
             description: 'E-commerce platform builder and manager that enables businesses to create and manage their online stores with ease. The platform includes customizable templates and powerful management tools.',
             techStack: ['Go', 'NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'Docker'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
               'Store builder interface',
@@ -113,11 +113,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Live Integration Dashboard (LID)',
             description: 'Real-time data integration and visualization dashboard providing insights into system performance and business metrics. The dashboard offers customizable views and automated reporting.',
             techStack: ['Node.js', 'Express', 'Go', 'Socket.io', 'MongoDB', 'MySQL', 'ReactJS'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo',
+              'https://mafatichulfuadi.com/Project/egogo/egogo'
             ],
             features: [
               'Real-time data visualization',
@@ -132,11 +132,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'Go-Media',
             description: 'Media content management and distribution platform designed for efficient handling of digital assets. The system supports various media types and includes advanced search capabilities.',
             techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
               'Media asset management',
@@ -151,11 +151,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'eGoGo Hub ERP',
             description: 'Egogohub ERP is an internal enterprise platform owned by eGoGo Hub Indonesia, designed to simplify business processes and support employee needs.',
             techStack: ['PHP Native', 'Dolibarr', 'Bootstrap', 'MySQL', 'JQuery'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
               'User & employee Management',
@@ -172,11 +172,11 @@ export async function fetchProjects(): Promise<Project[]> {
             title: 'eGoGo Hub Company Profile',
             description: 'This is a company profile platform used to introduce the company to the public.',
             techStack: ['PHP Native', 'Bootstrap', 'MySQL', 'Javascript', 'JQuery'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/Egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
               'Profile Company',
