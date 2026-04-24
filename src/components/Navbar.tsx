@@ -110,7 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             </Link>
           ))}
           <a 
-            href="/M.N. Mafatichul Fuadi - Software Engineer.pdf" 
+            href="/Mafatichul_Fuadi-Software_Engineer.pdf" 
             className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md transition-all"
             target="_blank"
             rel="noopener noreferrer"
