@@ -10,7 +10,7 @@ export async function fetchProjects(): Promise<Project[]> {
         resolve([
           {
             id: 1,
-            title: 'MyTelkomsel',
+            title: 'My Siloam',
             description: 'A centralized Omnichannel Healthcare Ecosystem for Siloam Hospitals nationwide, facilitating an End-to-End Patient Journey orchestration—ranging from Appointment Scheduling and Inpatient/Outpatient Admission to real-time Automated Notifications and Integrated Payment Gateway solutions.',
             techStack: ['Node.js', 'Expressjs', 'TypeScript', 'AngularJS', 'Reactjs', '.NET', 'PostgreSQL', 'MS SQL Server', 'Docker'],
             thumbnail: 'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
