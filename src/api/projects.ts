@@ -11,23 +11,23 @@ export async function fetchProjects(): Promise<Project[]> {
           {
             id: 1,
             title: 'MyTelkomsel',
-            description: 'Mobile operator customer portal and self-service application with advanced features for account management, billing, and service customization. The platform serves millions of users daily with real-time updates and seamless integration with backend services.',
-            techStack: ['ReactJS', 'Node.js', 'Expressjs', 'Hapijs', 'MongoDB', 'Amazone EKS', 'Amazone S3', 'Amazone ECR', 'Amazone EFS', 'Jenkins', 'Kubernetes', 'Docker'],
+            description: 'A centralized Omnichannel Healthcare Ecosystem for Siloam Hospitals nationwide, facilitating an End-to-End Patient Journey orchestration—ranging from Appointment Scheduling and Inpatient/Outpatient Admission to real-time Automated Notifications and Integrated Payment Gateway solutions.',
+            techStack: ['Node.js', 'Expressjs', 'TypeScript', 'AngularJS', 'Reactjs', '.NET', 'PostgreSQL', 'MS SQL Server', 'Docker'],
             thumbnail: 'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
             images: [
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail1.png',
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail2.png',
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail3.png'
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png'
             ],
             features: [
-              'Real-time usage monitoring',
-              'Bill payment integration',
-              'Package subscription management',
-              'Grapari Online Service',
-              'Service activation/deactivation',
+              'Patient Admission',
+              'Appointment Management',
+              'Inventory Management',
+              'Doctor Scheduling',
+              'Queue Monitoring',
               'etc'
             ],
-            demoUrl: 'https://my.telkomsel.com'
+            demoUrl: '-'
           },
           {
             id: 2,
