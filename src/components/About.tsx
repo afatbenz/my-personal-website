@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Code, Server, Database, GitBranch, Briefcase } from 'lucide-react';
 import { skills } from '../data/profileData';
 
+const slides = [
+  {
+    titleBefore: 'I turn ideas into ',
+    titleHighlight: 'scalable solutions.',
+    text: 'Strong foundation in backend development, implement reliable and scalable business system.',
+  },
+  {
+    titleBefore: 'Accelerated response, ',
+    titleHighlight: 'driven by precision.',
+    text: 'Experienced in improving system reliability, and delivering production-grade systems for high-traffic applications used by millions of active users.',
+  },
+  {
+    titleBefore: 'Forging teams, ',
+    titleHighlight: 'build a dream.',
+    text: 'Experienced in leading engineering teams in large-scale digital platforms.',
+  },
+];
+
 const About: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const goToSlide = useCallback((index: number) => {
+    if (isTransitioning || index === currentSlide) return;
+    setIsTransitioning(true);
+    setCurrentSlide(index);
+    setTimeout(() => setIsTransitioning(false), 500);
+  }, [currentSlide, isTransitioning]);
+
+  const goNext = useCallback(() => {
+    goToSlide((currentSlide + 1) % slides.length);
+  }, [currentSlide, goToSlide]);
+
+  // Auto-advance every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      goNext();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [goNext]);
+
   const getIconForCategory = (category: string) => {
     switch (category) {
       case 'Backend Engineering':
@@ -20,34 +60,48 @@ const About: React.FC = () => {
     }
   };
 
-  const totalYears = 7;
-  const programmingExperience = [
-    { language: 'Node.js', years: 6 },
-    { language: 'Go', years: 2 },
-    { language: 'PHP', years: 3 },
-    { language: 'TypeScript', years: 4 },
-    { language: 'React', years: 4 },
-    { language: 'Angular', years: 0.8 },
-    { language: 'SQL Database', years: 7 },
-    { language: 'NoSQL Database', years: 1 },
-  ];
-
   return (
     <section id="about" className="py-20 bg-dark-900">
       <div className="container px-4 mx-auto">
+        {/* Section Heading */}
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
           <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
-          <p className="max-w-3xl mx-auto text-gray-300 text-lg">
-            Software Engineer with 7+ years of experience building scalable back-end systems and enterprise
-            applications across telecom and healthcare digital platforms. Specialized in designing high-performance
-            APIs, microservices architecture, and database optimization. Experienced in leading engineering teams in
-            large-scale digital platforms, improving system reliability, and delivering production-grade systems for
-            high-traffic applications used by millions of active users.
-          </p>
+
+          {/* Carousel */}
+          <div className="carousel-container max-w-3xl mx-auto">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+              >
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  {slide.titleBefore}
+                  <span className="text-primary-400">{slide.titleHighlight}</span>
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  {slide.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Dot indicators */}
+          <div className="carousel-dots">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`carousel-dot ${index === currentSlide ? 'active' : ''}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Professional Summary */}
           <div className="flex flex-col space-y-5">
             <div className="flex flex-col space-y-2">
               <div className="flex items-center space-x-3">
@@ -62,18 +116,27 @@ const About: React.FC = () => {
             </div>
 
             <div className="p-6 bg-dark-800 rounded-lg shadow-lg border border-dark-700 hover:border-primary-800 transition-all">
-              <h3 className="text-xl font-semibold mb-6">Programming Languages & Databases</h3>
+              <h3 className="text-xl font-semibold mb-6">Programming Languages &amp; Databases</h3>
               <div className="space-y-4">
-                {programmingExperience.map((lang, index) => (
+                {[
+                  { language: 'Node.js', years: 6 },
+                  { language: 'Go', years: 2 },
+                  { language: 'PHP', years: 3 },
+                  { language: 'TypeScript', years: 4 },
+                  { language: 'React', years: 4 },
+                  { language: 'Angular', years: 0.8 },
+                  { language: 'SQL Database', years: 7 },
+                  { language: 'NoSQL Database', years: 1 },
+                ].map((lang, index) => (
                   <div key={index} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300">{lang.language}</span>
                       <span className="text-primary-400">{lang.years} years</span>
                     </div>
                     <div className="w-full h-2 bg-dark-700 rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-primary-500 rounded-full transition-all duration-500"
-                        style={{ width: `${(lang.years / totalYears) * 100}%` }}
+                        style={{ width: `${(lang.years / 7) * 100}%` }}
                       />
                     </div>
                   </div>
@@ -82,12 +145,12 @@ const About: React.FC = () => {
             </div>
           </div>
 
+          {/* Technical Skills */}
           <div className="grid grid-cols-1 gap-5">
             <h3 className="text-xl font-semibold mb-2">Technical Skills</h3>
-            
             {skills.map((skill, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="p-5 bg-dark-800 rounded-lg shadow-lg border border-dark-700 hover:border-primary-800 transition-all"
               >
                 <div className="flex items-center mb-3">
@@ -96,8 +159,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="flex flex-wrap gap-2 ml-9">
                   {skill.items.map((item, i) => (
-                    <span 
-                      key={i} 
+                    <span
+                      key={i}
                       className="px-3 py-1 bg-dark-700 rounded-full text-sm"
                     >
                       {item}

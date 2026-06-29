@@ -1,3 +1,242 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============ HERO - ANIMATED TERMINAL WIDGET ============ */
+.terminal-widget {
+  @apply rounded-lg overflow-hidden shadow-2xl border border-dark-600;
+  background: #0d1117;
+  font-family: 'Roboto Mono', monospace;
+  width: 100%;
+  max-width: 520px;
+}
+
+.terminal-header {
+  @apply flex items-center px-4 py-3;
+  background: #161b22;
+  border-bottom: 1px solid #21262d;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: opacity 0.2s;
+}
+
+.terminal-dot:hover {
+  opacity: 0.8;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+
+.terminal-title {
+  @apply text-xs text-gray-400 ml-2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.terminal-body {
+  @apply p-5 text-sm leading-relaxed min-h-[260px];
+}
+
+.terminal-line {
+  @apply mb-1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-line .keyword { color: #ff79c6; }
+.terminal-line .string { color: #50fa7b; }
+.terminal-line .method { color: #8be9fd; }
+.terminal-line .punctuation { color: #f8f8f2; }
+.terminal-line .operator { color: #f8f8f2; }
+.terminal-line .variable { color: #f8f8f2; }
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: #8be9fd;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-divider {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 12px 0;
+}
+
+.console-section {
+  @apply mt-2;
+}
+
+.console-label {
+  @apply text-xs font-semibold mb-2 block;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.console-output {
+  @apply overflow-hidden;
+}
+
+.console-line {
+  @apply py-1;
+  color: #50fa7b;
+  font-size: 0.8125rem;
+  transform: translateY(8px);
+  opacity: 0;
+  animation: consoleSlideIn 0.4s ease forwards;
+}
+
+.console-line .console-prefix {
+  color: #8be9fd;
+  margin-right: 6px;
+}
+
+@keyframes consoleSlideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============ ABOUT - ROTATING TEXT CAROUSEL ============ */
+.carousel-container {
+  @apply relative overflow-hidden;
+  min-height: 180px;
+}
+
+.carousel-slide {
+  @apply absolute inset-0 opacity-0 transition-all duration-500 ease-in-out;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+.carousel-slide.exit {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.carousel-dots {
+  @apply flex justify-center gap-3 mt-8;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  @apply bg-dark-500 cursor-pointer transition-all duration-300;
+}
+
+.carousel-dot.active {
+  @apply bg-primary-400;
+  width: 28px;
+  border-radius: 5px;
+}
+
+.carousel-dot:hover:not(.active) {
+  @apply bg-dark-400;
+}
+
+/* ============ EXPERIENCE - DRAGGABLE CARD SLIDER ============ */
+.slider-container {
+  @apply relative overflow-hidden;
+  margin: 0 -8px;
+}
+
+.slider-track {
+  @apply flex gap-6;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 8px 0 20px;
+}
+
+.slider-track.dragging {
+  cursor: grabbing;
+  transition: none !important;
+}
+
+.slider-track.smooth-scroll {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.exp-card {
+  @apply bg-dark-700 rounded-lg shadow-lg border border-dark-600 flex-shrink-0;
+  width: calc(50% - 12px);
+  min-width: 340px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.exp-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.08);
+}
+
+.exp-card.active {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.12);
+}
+
+.exp-card-inner {
+  @apply p-6;
+}
+
+.latest-badge {
+  @apply inline-flex items-center px-3 py-0.5 text-xs font-semibold rounded-full border mb-3;
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+}
+
+.slider-arrow {
+  @apply absolute top-1/2 -translate-y-1/2 z-10;
+  @apply w-10 h-10 flex items-center justify-center rounded-full;
+  @apply bg-dark-700 border border-dark-500 text-gray-300;
+  @apply transition-all duration-200;
+}
+
+.slider-arrow:hover {
+  @apply bg-primary-600 border-primary-600 text-white;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.slider-arrow.prev { @apply -left-1; }
+.slider-arrow.next { @apply -right-1; }
+
+.slider-arrow.disabled {
+  @apply opacity-0 pointer-events-none;
+}
+
+@media (max-width: 768px) {
+  .terminal-widget {
+    max-width: 100%;
+  }
+
+  .exp-card {
+    width: calc(100vw - 48px);
+    min-width: calc(100vw - 48px);
+  }
+
+  .slider-container {
+    margin: 0 -12px;
+  }
+}

@@ -4,9 +4,9 @@ export const experiences: Experience[] = [
   {
     id: 1,
     role: 'Software Engineer',
-    company: 'PT. Bithealth',
+    company: 'PT. Britech',
     location: 'Tangerang, Indonesia',
-    period: 'Jul 2025 - Apr 2026',
+    period: '2022 – Present',
     responsibilities: [
       'Troubleshoot and resolve production issues through root cause analysis, improving system stability and reducing recurring incidents',
       'Improve API performance by optimizing inefficient queries and resolving N+1 query problems',
@@ -23,7 +23,7 @@ export const experiences: Experience[] = [
     role: 'Web Development Team Lead',
     company: 'PT. Phincon',
     location: 'Jakarta, Indonesia',
-    period: 'Apr 2023 - Apr 2025',
+    period: '2019 – 2022',
     responsibilities: [
       'Led a 10-member team delivering high-performance and scalable API services for 30+ Telkomsel applications',
       'Ensured high system reliability and achieved 100% SLA compliance during Non-Functional Testing',
@@ -38,11 +38,11 @@ export const experiences: Experience[] = [
   {
     id: 3,
     role: 'Fullstack Developer',
-    company: 'PT. Phincon',
+    company: 'PT. JPHarm',
     location: 'Jakarta, Indonesia',
-    period: 'Nov 2021 - Jul 2025',
+    period: '2017 – 2019',
     responsibilities: [
-      'Developed and maintained scalable API services for Telkomsel enterprise systems',
+      'Developed and maintained scalable API services for enterprise systems',
       'Collaborated with QA and DevOps teams across SIT, UAT, regression, functional, and non-functional testing',
       'Built automated unit tests achieving 80%+ coverage to improve code quality and system reliability',
       'Optimized backend services and database queries to achieve sub-second API response times'
@@ -53,9 +53,9 @@ export const experiences: Experience[] = [
   {
     id: 4,
     role: 'IT Developer',
-    company: 'PT. eGoGo Hub Indonesia',
+    company: 'PT. Gooto Hub Indonesia',
     location: 'Jakarta, Indonesia',
-    period: 'Oct 2018 - Oct 2021',
+    period: '2016 – 2017',
     responsibilities: [
       'Built and maintained ERP systems and corporate websites',
       'Translated business requirements into scalable, database-driven applications',
