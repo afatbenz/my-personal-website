@@ -14,9 +14,7 @@ export const experiences: Experience[] = [
       'Implement backend and frontend improvements including bug fixes and feature enhancements',
       'Improve system observability by enhancing application logging and monitoring',
       'Improved API response time by up to 70% through database query optimization'
-    ],
-    projects: 'Siloam Hospitals (frontoffice, kairos, payment, queue management, opdadmin)',
-    techStack: 'Angular, React, Express.js, Typescript, .NET, SQL Server (MSSQL), PostgreSQL, Kibana'
+    ]
   },
   {
     id: 2,
@@ -31,39 +29,31 @@ export const experiences: Experience[] = [
       'Implemented engineering standards, documentation practices, and development workflows to improve productivity',
       'Managed sprint planning, team capacity, and backlog prioritization to maintain consistent delivery performance',
       'Mentored junior developers and conducted technical reviews to maintain code quality'
-    ],
-    projects: 'MyTelkomsel Web',
-    techStack: 'Hapi.js, Express.js, React, MySQL, Redis, AWS, Docker, Jenkins, Jira'
+    ]
   },
   {
     id: 3,
     role: 'Fullstack Developer',
     company: 'PT. JPHarm',
-    location: 'Jakarta, Indonesia',
+    location: 'Indonesia',
     period: '2017 – 2019',
     responsibilities: [
-      'Developed and maintained scalable API services for enterprise systems',
-      'Collaborated with QA and DevOps teams across SIT, UAT, regression, functional, and non-functional testing',
-      'Built automated unit tests achieving 80%+ coverage to improve code quality and system reliability',
-      'Optimized backend services and database queries to achieve sub-second API response times'
-    ],
-    projects: 'MyTelkomsel Web, MyTelkomsel Apps, MyTelkomsel Lite',
-    techStack: 'Hapi.js, Express.js, React, MySQL, Redis, AWS, Docker, Jenkins, Jira'
+      'Built and maintained web applications',
+      'Designed RESTful APIs and database schemas',
+      'Collaborated with cross-functional teams'
+    ]
   },
   {
     id: 4,
     role: 'IT Developer',
     company: 'PT. Gooto Hub Indonesia',
-    location: 'Jakarta, Indonesia',
+    location: 'Indonesia',
     period: '2016 – 2017',
     responsibilities: [
-      'Built and maintained ERP systems and corporate websites',
-      'Translated business requirements into scalable, database-driven applications',
-      'Delivered client-facing solutions and supported production systems used in daily business operations',
-      'Improved internal workflows and resolved production issues to support business operations'
-    ],
-    projects: 'eGoGo Web & ERP, Dekkson ERP & Loyalty, Hattan Intl, Go-Commerce Builder, Live Integration Dashboard (LID)',
-    techStack: 'PHP Native, Express.js, React, Go, Dolibarr, MySQL'
+      'Maintained internal systems and infrastructures',
+      'Developed features based on requirements',
+      'Troubleshot and fixed system issues'
+    ]
   }
 ];
 
