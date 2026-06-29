@@ -231,7 +231,7 @@ const Hero: React.FC = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-12 bg-gradient-to-b from-dark-900/90 to-dark-800/90">
       <ParticlesBackground id="hero-particles" />
 
-      <div className="container px-4 mx-auto z-10">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left side: Text content */}
           <div className="flex-1 text-center lg:text-left max-w-xl">

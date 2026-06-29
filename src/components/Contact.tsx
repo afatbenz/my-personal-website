@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-20 bg-dark-800 relative overflow-hidden">
       <ParticlesBackground id="contact-particles" />
-      <div className="container px-4 mx-auto relative z-10">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

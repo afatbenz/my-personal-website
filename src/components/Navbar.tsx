@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         isScrolled ? 'bg-dark-800 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
       }`}
     >
-      <div className="container px-4 mx-auto flex justify-between items-center">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto flex justify-between items-center">
         <Link
           to="home"
           spy={true}

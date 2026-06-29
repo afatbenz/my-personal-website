@@ -34,7 +34,7 @@ const Projects: React.FC = () => {
 
   return (
     <section id="projects" className="py-20 bg-dark-900">
-      <div className="container px-4 mx-auto">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
           <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>

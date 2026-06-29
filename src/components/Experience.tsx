@@ -194,7 +194,7 @@ const Experience: React.FC = () => {
 
   return (
     <section id="experience" className="py-20 bg-dark-800 overflow-hidden">
-      <div className="container px-4 mx-auto">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             My <span className="text-primary-400">Professional Journey</span>
