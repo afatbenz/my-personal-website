@@ -4,9 +4,9 @@ export const experiences: Experience[] = [
   {
     id: 1,
     role: 'Software Engineer',
-    company: 'PT. Britech',
+    company: 'PT. Bithealth',
     location: 'Tangerang, Indonesia',
-    period: '2022 – Present',
+    period: '2025 – 2026',
     responsibilities: [
       'Troubleshoot and resolve production issues through root cause analysis, improving system stability and reducing recurring incidents',
       'Improve API performance by optimizing inefficient queries and resolving N+1 query problems',
@@ -18,10 +18,10 @@ export const experiences: Experience[] = [
   },
   {
     id: 2,
-    role: 'Web Development Team Lead',
+    role: 'Development Team Lead',
     company: 'PT. Phincon',
     location: 'Jakarta, Indonesia',
-    period: '2019 – 2022',
+    period: '2022 – 2025',
     responsibilities: [
       'Led a 10-member team delivering high-performance and scalable API services for 30+ Telkomsel applications',
       'Ensured high system reliability and achieved 100% SLA compliance during Non-Functional Testing',
@@ -34,25 +34,27 @@ export const experiences: Experience[] = [
   {
     id: 3,
     role: 'Fullstack Developer',
-    company: 'PT. JPHarm',
-    location: 'Indonesia',
-    period: '2017 – 2019',
+    company: 'PT. Phincon',
+    location: 'Jakarta, Indonesia',
+    period: '2021 – 2022',
     responsibilities: [
-      'Built and maintained web applications',
-      'Designed RESTful APIs and database schemas',
-      'Collaborated with cross-functional teams'
+      'Developed and maintained scalable API services for Telkomsel enterprise systems.',
+      'Collaborated with QA and DevOps teams across SIT, UAT, regression, functional, and non-functional testing.',
+      'Built automated unit tests achieving 80%+ coverage to improve code quality and system reliability.',
+      'Optimized backend services and database queries to achieve sub‑second API response times.'
     ]
   },
   {
     id: 4,
     role: 'IT Developer',
-    company: 'PT. Gooto Hub Indonesia',
-    location: 'Indonesia',
+    company: 'PT. Egogo Hub Indonesia',
+    location: 'Jakarta, Indonesia',
     period: '2016 – 2017',
     responsibilities: [
-      'Maintained internal systems and infrastructures',
-      'Developed features based on requirements',
-      'Troubleshot and fixed system issues'
+      'Built and maintained ERP systems and corporate websites.',
+      'Translated business requirements into scalable, database-driven applications.',
+      'Delivered client‑facing solutions and supported production systems used in daily business operations.',
+      'Improved internal workflows and resolved production issues to support business operations.'
     ]
   }
 ];

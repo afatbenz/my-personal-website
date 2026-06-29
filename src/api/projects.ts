@@ -10,84 +10,80 @@ export async function fetchProjects(): Promise<Project[]> {
         resolve([
           {
             id: 1,
-            title: 'My Siloam',
-            description: 'A centralized Omnichannel Healthcare Ecosystem for Siloam Hospitals nationwide, facilitating an End-to-End Patient Journey orchestration—ranging from Appointment Scheduling and Inpatient/Outpatient Admission to real-time Automated Notifications and Integrated Payment Gateway solutions.',
-            techStack: ['Node.js', 'Expressjs', 'TypeScript', 'AngularJS', 'Reactjs', '.NET', 'PostgreSQL', 'MS SQL Server', 'Docker'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+            title: 'eGoGo Hub Company Profile',
+            description: 'This is a company profile platform used to introduce the company to the public.',
+            techStack: ['PHP Native', 'Bootstrap', 'MySQL', 'Javascript', 'JQuery'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
-              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
-              'https://mafatichulfuadi.com/Project/Siloam/siloam.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
-              'Patient Admission',
-              'Appointment Management',
-              'Inventory Management',
-              'Doctor Scheduling',
-              'Queue Monitoring',
-              'etc'
+              'Profile Company',
+              'Job Vacancy',
+              'Contact',
             ],
-            demoUrl: '-'
+            demoUrl: 'https://www.egogohub.com'
           },
           {
             id: 2,
-            title: 'MyTelkomsel',
-            description: 'Mobile operator customer portal and self-service application with advanced features for account management, billing, and service customization. The platform serves millions of users daily with real-time updates and seamless integration with backend services.',
-            techStack: ['ReactJS', 'Node.js', 'Expressjs', 'Hapijs', 'MongoDB', 'Amazone EKS', 'Amazone S3', 'Amazone ECR', 'Amazone EFS', 'Jenkins', 'Kubernetes', 'Docker'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail.png',
+            title: 'eGoGo Hub ERP',
+            description: 'Egogohub ERP is an internal enterprise platform owned by eGoGo Hub Indonesia, designed to simplify business processes and support employee needs.',
+            techStack: ['PHP Native', 'Dolibarr', 'Bootstrap', 'MySQL', 'JQuery'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail1.png',
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail2.png',
-              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail3.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
-              'Real-time usage monitoring',
-              'Bill payment integration',
-              'Package subscription management',
-              'Grapari Online Service',
-              'Service activation/deactivation',
+              'User & employee Management',
+              'Attendance Tracking',
+              'Timesheet Management',
+              'Warehouse & Fulfillment Management',
+              'Finance & Accounting',
               'etc'
             ],
-            demoUrl: 'https://my.telkomsel.com'
+            demoUrl: 'https://erp.egogohub.com'
           },
           {
             id: 3,
-            title: 'Dekkson Loyalty System',
-            description: 'Customer loyalty and rewards management system designed to enhance customer engagement and retention. The platform includes point tracking, reward redemption, and personalized offers based on customer behavior.',
-            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'jQuery'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
+            title: 'Go-Media',
+            description: 'Media content management and distribution platform designed for efficient handling of digital assets. The system supports various media types and includes advanced search capabilities.',
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
             ],
             features: [
-              'Points tracking system',
-              'Reward catalog management',
-              'Customer segmentation',
-              'Analytics dashboard',
-              'Integration with POS systems'
+              'Media asset management',
+              'Content distribution',
+              'User access control',
+              'Version control',
+              'Automated workflows'
             ]
           },
           {
             id: 4,
-            title: 'Dekkson ERP',
-            description: 'Enterprise resource planning system for inventory and sales management, streamlining business operations and improving efficiency. The system provides comprehensive tools for managing various aspects of the business.',
-            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'Bootstrap'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
+            title: 'Live Integration Dashboard (LID)',
+            description: 'Real-time data integration and visualization dashboard providing insights into system performance and business metrics. The dashboard offers customizable views and automated reporting.',
+            techStack: ['Node.js', 'Express', 'Go', 'Socket.io', 'MongoDB', 'MySQL', 'ReactJS'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
             images: [
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
-              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png'
+              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+              'https://mafatichulfuadi.com/Project/egogo/egogo',
+              'https://mafatichulfuadi.com/Project/egogo/egogo'
             ],
             features: [
-              'Inventory management',
-              'Sales tracking',
-              'Purchase order processing',
-              'Financial reporting',
-              'Employee management'
-            ],
-            demoUrl: 'https://erp.dekkson.com'
+              'Real-time data visualization',
+              'Custom dashboard creation',
+              'Alert configuration',
+              'Data export capabilities',
+              'System health monitoring'
+            ]
           },
           {
             id: 5,
@@ -110,81 +106,125 @@ export async function fetchProjects(): Promise<Project[]> {
           },
           {
             id: 6,
-            title: 'Live Integration Dashboard (LID)',
-            description: 'Real-time data integration and visualization dashboard providing insights into system performance and business metrics. The dashboard offers customizable views and automated reporting.',
-            techStack: ['Node.js', 'Express', 'Go', 'Socket.io', 'MongoDB', 'MySQL', 'ReactJS'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+            title: 'Dekkson ERP',
+            description: 'Enterprise resource planning system for inventory and sales management, streamlining business operations and improving efficiency. The system provides comprehensive tools for managing various aspects of the business.',
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'Bootstrap'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
             images: [
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo',
-              'https://mafatichulfuadi.com/Project/egogo/egogo'
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png',
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson-erp.png'
             ],
             features: [
-              'Real-time data visualization',
-              'Custom dashboard creation',
-              'Alert configuration',
-              'Data export capabilities',
-              'System health monitoring'
-            ]
+              'Inventory management',
+              'Sales tracking',
+              'Purchase order processing',
+              'Financial reporting',
+              'Employee management'
+            ],
+            demoUrl: 'https://erp.dekkson.com'
           },
           {
             id: 8,
-            title: 'Go-Media',
-            description: 'Media content management and distribution platform designed for efficient handling of digital assets. The system supports various media types and includes advanced search capabilities.',
-            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+            title: 'Dekkson Loyalty System',
+            description: 'Customer loyalty and rewards management system designed to enhance customer engagement and retention. The platform includes point tracking, reward redemption, and personalized offers based on customer behavior.',
+            techStack: ['NodeJS', 'ExpressJS', 'ReactJS', 'MySQL', 'JavaScript', 'jQuery'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
             images: [
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png',
+              'https://mafatichulfuadi.com/Project/Dekkson/dekkson.png'
             ],
             features: [
-              'Media asset management',
-              'Content distribution',
-              'User access control',
-              'Version control',
-              'Automated workflows'
+              'Points tracking system',
+              'Reward catalog management',
+              'Customer segmentation',
+              'Analytics dashboard',
+              'Integration with POS systems'
             ]
           },
           {
             id: 9,
-            title: 'eGoGo Hub ERP',
-            description: 'Egogohub ERP is an internal enterprise platform owned by eGoGo Hub Indonesia, designed to simplify business processes and support employee needs.',
-            techStack: ['PHP Native', 'Dolibarr', 'Bootstrap', 'MySQL', 'JQuery'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+            title: 'MyTelkomsel',
+            description: 'Mobile operator customer portal and self-service application with advanced features for account management, billing, and service customization. The platform serves millions of users daily with real-time updates and seamless integration with backend services.',
+            techStack: ['ReactJS', 'Node.js', 'Expressjs', 'Hapijs', 'MongoDB', 'Amazone EKS', 'Amazone S3', 'Amazone ECR', 'Amazone EFS', 'Jenkins', 'Kubernetes', 'Docker'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail.png',
             images: [
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail1.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail2.png',
+              'https://mafatichulfuadi.com/Project/MyTelkomsel/Thumbnail3.png'
             ],
             features: [
-              'User & employee Management',
-              'Attendance Tracking',
-              'Timesheet Management',
-              'Warehouse & Fulfillment Management',
-              'Finance & Accounting',
+              'Real-time usage monitoring',
+              'Bill payment integration',
+              'Package subscription management',
+              'Grapari Online Service',
+              'Service activation/deactivation',
               'etc'
             ],
-            demoUrl: 'https://erp.egogohub.com'
+            demoUrl: 'https://my.telkomsel.com'
           },
           {
             id: 10,
-            title: 'eGoGo Hub Company Profile',
-            description: 'This is a company profile platform used to introduce the company to the public.',
-            techStack: ['PHP Native', 'Bootstrap', 'MySQL', 'Javascript', 'JQuery'],
-            thumbnail: 'https://mafatichulfuadi.com/Project/egogo/egogo.png',
+            title: 'My Siloam',
+            description: 'A centralized Omnichannel Healthcare Ecosystem for Siloam Hospitals nationwide, facilitating an End-to-End Patient Journey orchestration—ranging from Appointment Scheduling and Inpatient/Outpatient Admission to real-time Automated Notifications and Integrated Payment Gateway solutions.',
+            techStack: ['Node.js', 'Expressjs', 'TypeScript', 'AngularJS', 'Reactjs', '.NET', 'PostgreSQL', 'MS SQL Server', 'Docker'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
             images: [
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png',
-              'https://mafatichulfuadi.com/Project/egogo/egogo.png'
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png'
             ],
             features: [
-              'Profile Company',
-              'Job Vacancy',
-              'Contact',
+              'Patient Admission',
+              'Appointment Management',
+              'Inventory Management',
+              'Doctor Scheduling',
+              'Queue Monitoring',
+              'etc'
             ],
-            demoUrl: 'https://www.egogohub.com'
-          }
+            demoUrl: '-'
+          },
+          {
+            id: 11,
+            title: 'TraveGo',
+            description: 'Specialized AI and ERP software for transport providers (buses, trucks, construction fleets). TraveGo simplifies your operations, from fleet and employee management to scheduling and automated reporting.',
+            techStack: ['Go Fiber', 'AngularJS', 'Reactjs', 'PostgreSQL', 'Docker'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/travego/preview.png',
+            images: [
+              'https://mafatichulfuadi.com/Project/travego/preview1.png',
+              'https://mafatichulfuadi.com/Project/travego/preview2.png',
+              'https://mafatichulfuadi.com/Project/travego/preview.png'
+            ],
+            features: [
+              'AI Assistant for Customer Service',
+              'AI Assistant to manage business',
+              'Fleet Management',
+              'Inventory Management',
+              'Order Management',
+              'etc'
+            ],
+            demoUrl: 'https://travego.id'
+          },
+          {
+            id: 12,
+            title: 'Calista Prima',
+            description: 'A professional website for corporate profiles and service catalogs of transportation companies offering car rental and tourist bus services.',
+            techStack: ['Reactjs'],
+            thumbnail: 'https://mafatichulfuadi.com/Project/travego/siloam.png',
+            images: [
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png',
+              'https://mafatichulfuadi.com/Project/Siloam/siloam.png'
+            ],
+            features: [
+              'Landing Page',
+              'Catalogue',
+              'Inquiry',
+              'etc'
+            ],
+            demoUrl: 'https://calistaprima.com'
+          },
         ]);
       }, 1000);
     });

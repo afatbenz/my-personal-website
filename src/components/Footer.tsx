@@ -4,7 +4,7 @@ import { Github as GitHub, Linkedin, Twitter, ArrowUp, Instagram } from 'lucide-
 
 const Footer: React.FC<{ visits: number }> = ({ visits }) => {
   return (
-    <footer className="bg-dark-900 pt-12 pb-8">
+    <footer id="footer" className="relative z-[1] bg-dark-900 pt-12 pb-8">
       <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="flex flex-col items-center">
           <Link

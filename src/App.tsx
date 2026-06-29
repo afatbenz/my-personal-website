@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,13 +10,24 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
+import GlobalParticlesBackground from './components/GlobalParticlesBackground';
 import { useScrollPosition } from './hooks/useScrollPosition';
 import supabase from './helpers/supabaseClient';
 
+const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
 function HomePage() {
   const { activeSection } = useScrollPosition();
+  const overlapSceneRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [count, setCount] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [aboutHeight, setAboutHeight] = useState(0);
+  const [experienceHeight, setExperienceHeight] = useState(0);
+  const [overlapScroll, setOverlapScroll] = useState(0);
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -25,6 +36,66 @@ function HomePage() {
       document.documentElement.style.scrollBehavior = '';
     };
     
+  }, []);
+
+  useEffect(() => {
+    const updateMeasurements = () => {
+      const currentViewportHeight = window.innerHeight;
+      const measuredAboutHeight = aboutRef.current?.offsetHeight ?? currentViewportHeight;
+      const measuredExperienceHeight = experienceRef.current?.offsetHeight ?? currentViewportHeight;
+
+      setViewportHeight(currentViewportHeight);
+      setAboutHeight(measuredAboutHeight);
+      setExperienceHeight(measuredExperienceHeight);
+    };
+
+    const updateOverlapScroll = () => {
+      const sceneElement = overlapSceneRef.current;
+      const currentViewportHeight = window.innerHeight;
+      const totalScrollDistance = Math.max(
+        (aboutRef.current?.offsetHeight ?? currentViewportHeight)
+          + (experienceRef.current?.offsetHeight ?? currentViewportHeight),
+        currentViewportHeight,
+      );
+
+      if (!sceneElement) {
+        return;
+      }
+
+      const sceneRect = sceneElement.getBoundingClientRect();
+      const currentScroll = clamp(-sceneRect.top, 0, totalScrollDistance);
+
+      setOverlapScroll(currentScroll);
+    };
+
+    updateMeasurements();
+    updateOverlapScroll();
+
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => {
+          updateMeasurements();
+          updateOverlapScroll();
+        })
+      : null;
+
+    if (aboutRef.current && resizeObserver) {
+      resizeObserver.observe(aboutRef.current);
+    }
+
+    if (experienceRef.current && resizeObserver) {
+      resizeObserver.observe(experienceRef.current);
+    }
+
+    window.addEventListener('scroll', updateOverlapScroll, { passive: true });
+    window.addEventListener('resize', updateMeasurements);
+    window.addEventListener('resize', updateOverlapScroll);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener('scroll', updateOverlapScroll);
+      window.removeEventListener('resize', updateMeasurements);
+      window.removeEventListener('resize', updateOverlapScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -125,23 +196,106 @@ function HomePage() {
   
     fetchData();
   }, []);  
+
+  const effectiveViewportHeight = viewportHeight || 0;
+  const measuredAboutHeight = aboutHeight || effectiveViewportHeight || 0;
+  const measuredExperienceHeight = experienceHeight || effectiveViewportHeight || 0;
+
+  const transitionDistance = effectiveViewportHeight || 1;
+  const scrollProgress = clamp(overlapScroll / transitionDistance, 0, 1);
+  const heroOpacity = clamp(1 - scrollProgress * 1.4, 0, 1);
+  const heroScale = 1 - scrollProgress * 0.06;
+  const aboutOverflowDistance = Math.max(measuredAboutHeight - effectiveViewportHeight, 0);
+  const aboutTranslateY = clamp(
+    effectiveViewportHeight - overlapScroll,
+    -aboutOverflowDistance,
+    effectiveViewportHeight,
+  );
+  const experienceOverflowDistance = Math.max(measuredExperienceHeight - effectiveViewportHeight, 0);
+  const experienceTranslateY = clamp(
+    effectiveViewportHeight + measuredAboutHeight - overlapScroll,
+    -experienceOverflowDistance,
+    effectiveViewportHeight + measuredAboutHeight,
+  );
+  const overlapSceneHeight = effectiveViewportHeight + measuredAboutHeight + measuredExperienceHeight;
   
 
   return (
-    <div className={`min-h-screen bg-dark-800 text-gray-200 ${isMounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+    <div className={`relative z-[1] min-h-screen bg-dark-800 text-gray-200 ${isMounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+      <GlobalParticlesBackground />
       <CustomCursor />
-      <Navbar activeSection={activeSection} />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Contact />
+      <header className="relative z-[1]">
+        <Navbar activeSection={activeSection} />
+      </header>
+      <main className="relative z-[1]">
+        <div
+          ref={overlapSceneRef}
+          className="relative"
+          style={{ height: overlapSceneHeight > 0 ? `${overlapSceneHeight}px` : '200vh' }}
+        >
+          <div
+            ref={heroRef}
+            className="sticky top-0 h-screen overflow-hidden"
+          >
+            <div
+              className="absolute inset-0 z-[1]"
+              style={{
+                opacity: heroOpacity,
+                transform: `scale(${heroScale})`,
+                transformOrigin: 'center top',
+                transition: 'none',
+                willChange: 'transform, opacity',
+              }}
+            >
+              <Hero />
+            </div>
+
+            <div
+              ref={aboutRef}
+              className="absolute inset-x-0 top-0 z-[10] overflow-hidden rounded-t-[24px]"
+              style={{
+                background: 'var(--color-dark-800, #050d1a)',
+                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
+                transform: `translate3d(0, ${aboutTranslateY}px, 0)`,
+                transition: 'none',
+                willChange: 'transform',
+              }}
+            >
+              <About />
+            </div>
+
+            <div
+              ref={experienceRef}
+              className="absolute inset-x-0 top-0 z-[20] overflow-hidden rounded-t-[24px]"
+              style={{
+                background: 'var(--color-dark-800, #050d1a)',
+                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
+                transform: `translate3d(0, ${experienceTranslateY}px, 0)`,
+                transition: 'none',
+                willChange: 'transform',
+              }}
+            >
+              <Experience />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-[10]">
+          <Projects />
+          <Contact />
+        </div>
       </main>
       <Footer visits={count} />
       <ScrollToTop />
       
       <style jsx global>{`
+        section,
+        header,
+        footer {
+          position: relative;
+          z-index: 1;
+        }
+
         ::-webkit-scrollbar {
           width: 10px;
         }
