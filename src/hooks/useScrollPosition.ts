@@ -9,20 +9,24 @@ export const useScrollPosition = () => {
       const position = window.scrollY;
       setScrollPosition(position);
       
-      // Determine active section based on scroll position
-      const sections = document.querySelectorAll('section[id]');
-      
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).offsetTop - 100;
-        const sectionHeight = (section as HTMLElement).offsetHeight;
+      const sections = Array.from(document.querySelectorAll('section[id]')) as HTMLElement[];
+      const triggerLine = 120;
+      let nextActiveSection = 'home';
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
         const sectionId = section.getAttribute('id') || '';
-        
-        if (position >= sectionTop && position < sectionTop + sectionHeight) {
-          setActiveSection(sectionId);
+
+        if (rect.top <= triggerLine && rect.bottom > triggerLine) {
+          nextActiveSection = sectionId;
+          break;
         }
-      });
+      }
+
+      setActiveSection(nextActiveSection);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     
     return () => {

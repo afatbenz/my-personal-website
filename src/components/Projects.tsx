@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectDialog from './ProjectDialog';
 import { Project } from '../types/types';
 import { fetchProjects } from '../api/projects';
 
+const MOBILE_MEDIA_QUERY = '(max-width: 767px)';
+
 const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia(MOBILE_MEDIA_QUERY).matches;
+  });
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -24,6 +33,30 @@ const Projects: React.FC = () => {
     loadProjects();
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
+    const handleMediaChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    setIsMobile(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
+
+  const displayedProjects = useMemo(() => {
+    const sortedProjects = [...projects].sort((a, b) => b.id - a.id);
+
+    if (isMobile) {
+      return sortedProjects.slice(0, 4);
+    }
+
+    return sortedProjects.slice(0, 6);
+  }, [projects, isMobile]);
+
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
   };
@@ -33,8 +66,8 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-dark-900">
-      <div className="container px-4 mx-auto">
+    <section id="projects" className="relative z-[1] bg-dark-900 py-20">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
           <div className="w-20 h-1 bg-primary-500 mx-auto mb-6"></div>
@@ -49,7 +82,7 @@ const Projects: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects?.slice(0,6).map(project => (
+            {displayedProjects.map(project => (
               <ProjectCard 
                 key={project.id} 
                 project={project} 

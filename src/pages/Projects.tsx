@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +52,7 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-dark-800 py-20">
-      <div className="container px-4 mx-auto">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

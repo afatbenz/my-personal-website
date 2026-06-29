@@ -32,11 +32,11 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   return (
     <nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-950000 transition-all duration-300 ${
         isScrolled ? 'bg-dark-800 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
       }`}
     >
-      <div className="container px-4 mx-auto flex justify-between items-center">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto flex justify-between items-center">
         <Link
           to="home"
           spy={true}
@@ -58,11 +58,19 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               smooth={true}
               offset={-70}
               duration={500}
-              className={`cursor-pointer transition-all hover:text-primary-400 ${
-                activeSection === item.id ? 'text-primary-400 font-medium' : 'text-gray-300'
+              className={`relative flex cursor-pointer flex-col items-center transition-all hover:text-primary-400 ${
+                activeSection === item.id ? 'font-medium text-white' : 'text-gray-300'
               }`}
             >
-              {item.label}
+              <span>{item.label}</span>
+              <span
+                className={`mt-1 text-[10px] leading-none text-[#00bfff] transition-opacity duration-300 ${
+                  activeSection === item.id ? 'opacity-100' : 'opacity-0'
+                }`}
+                aria-hidden="true"
+              >
+                •
+              </span>
             </Link>
           ))}
           <a 
