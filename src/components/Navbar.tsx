@@ -1,10 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
 import { Menu, X, Download } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
 }
+
+const SECTION_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+const NAVBAR_HEIGHT = 80;
+
+const scrollToSection = (sectionId: string) => {
+  const index = SECTION_IDS.indexOf(sectionId);
+  if (index < 0) return;
+
+  if (index === 0) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  const vh = window.innerHeight;
+  let scrollTarget = vh;
+  for (let i = 1; i < index; i++) {
+    const el = document.getElementById(SECTION_IDS[i]);
+    scrollTarget += el?.offsetHeight ?? vh;
+  }
+
+  scrollTarget = Math.max(scrollTarget - NAVBAR_HEIGHT, 0);
+
+  window.scrollTo({
+    top: scrollTarget,
+    behavior: 'smooth',
+  });
+};
 
 const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,68 +51,53 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
   ];
 
   return (
-    <nav 
-      className={`fixed top-0 w-full z-950000 transition-all duration-300 ${
+    <nav
+      className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${
         isScrolled ? 'bg-dark-800 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="container px-6 md:px-12 lg:px-20 mx-auto flex justify-between items-center">
-        <Link
-          to="home"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
+        <button
+          onClick={() => scrollToSection('home')}
           className="font-mono text-lg font-medium cursor-pointer text-primary-400"
         >
           &lt;MF /&gt;
-        </Link>
+        </button>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            <Link
+            <button
               key={item.id}
-              to={item.id}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className={`relative flex cursor-pointer flex-col items-center transition-all hover:text-primary-400 ${
+              onClick={() => scrollToSection(item.id)}
+              className={`relative flex cursor-pointer flex-col items-center transition-all hover:text-primary-400 mt-1 ${
                 activeSection === item.id ? 'font-medium text-white' : 'text-gray-300'
               }`}
             >
               <span>{item.label}</span>
-              <span
-                className={`mt-1 text-[10px] leading-none text-[#00bfff] transition-opacity duration-300 ${
-                  activeSection === item.id ? 'opacity-100' : 'opacity-0'
-                }`}
-                aria-hidden="true"
-              >
-                •
-              </span>
-            </Link>
+            </button>
           ))}
-          <a 
-            href="/M.N. Mafatichul Fuadi - Software Engineer.pdf" 
-            className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md transition-all"
+          <a
+            href="/M.N. Mafatichul Fuadi - Software Engineer.pdf"
+            className="flex items-center gap-2 bg-transparent hover:bg-white/5 border-white text-sm border-[1px] text-white px-4 py-2 rounded-xl transition-all"
             download="M.N. Mafatichul Fuadi - Software Engineer.pdf"
             rel="noopener noreferrer"
           >
             <Download size={16} />
-            Resume
+            Download Resume
           </a>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-gray-300 focus:outline-none" 
+        <button
+          className="md:hidden text-gray-300 focus:outline-none"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -95,36 +106,34 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
       </div>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         className={`md:hidden fixed inset-0 bg-dark-800 bg-opacity-95 z-40 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full space-y-8">
           {navItems.map((item) => (
-            <Link
+            <button
               key={item.id}
-              to={item.id}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              onClick={closeMenu}
+              onClick={() => {
+                scrollToSection(item.id);
+                closeMenu();
+              }}
               className={`text-xl cursor-pointer transition-all hover:text-primary-400 ${
                 activeSection === item.id ? 'text-primary-400 font-medium' : 'text-gray-300'
               }`}
             >
               {item.label}
-            </Link>
+            </button>
           ))}
-          <a 
-            href="/Mafatichul_Fuadi-Software_Engineer.pdf" 
+          <a
+            href="/Mafatichul_Fuadi-Software_Engineer.pdf"
             className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md transition-all"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Download size={18} />
-            Resume
+            Download Resume
           </a>
         </div>
       </div>

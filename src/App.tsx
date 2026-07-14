@@ -3,15 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import ProjectsPage from './pages/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import PageDots from './components/ScrollSpyIndicator';
+import GlobalSnippets from './components/GlobalSnippets';
 import CustomCursor from './components/CustomCursor';
 import GlobalParticlesBackground from './components/GlobalParticlesBackground';
 import { useScrollPosition } from './hooks/useScrollPosition';
+import { useScrollRestoration } from './hooks/useScrollRestoration';
 import supabase from './helpers/supabaseClient';
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
@@ -21,12 +25,18 @@ function HomePage() {
   const overlapSceneRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [count, setCount] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
   const [aboutHeight, setAboutHeight] = useState(0);
+  const [skillsHeight, setSkillsHeight] = useState(0);
   const [experienceHeight, setExperienceHeight] = useState(0);
+  const [projectsHeight, setProjectsHeight] = useState(0);
+  const [contactHeight, setContactHeight] = useState(0);
   const [overlapScroll, setOverlapScroll] = useState(0);
 
   useEffect(() => {
@@ -42,11 +52,17 @@ function HomePage() {
     const updateMeasurements = () => {
       const currentViewportHeight = window.innerHeight;
       const measuredAboutHeight = aboutRef.current?.offsetHeight ?? currentViewportHeight;
+      const measuredSkillsHeight = skillsRef.current?.offsetHeight ?? currentViewportHeight;
       const measuredExperienceHeight = experienceRef.current?.offsetHeight ?? currentViewportHeight;
+      const measuredProjectsHeight = projectsRef.current?.offsetHeight ?? currentViewportHeight;
+      const measuredContactHeight = contactRef.current?.offsetHeight ?? currentViewportHeight;
 
       setViewportHeight(currentViewportHeight);
       setAboutHeight(measuredAboutHeight);
+      setSkillsHeight(measuredSkillsHeight);
       setExperienceHeight(measuredExperienceHeight);
+      setProjectsHeight(measuredProjectsHeight);
+      setContactHeight(measuredContactHeight);
     };
 
     const updateOverlapScroll = () => {
@@ -54,7 +70,10 @@ function HomePage() {
       const currentViewportHeight = window.innerHeight;
       const totalScrollDistance = Math.max(
         (aboutRef.current?.offsetHeight ?? currentViewportHeight)
-          + (experienceRef.current?.offsetHeight ?? currentViewportHeight),
+          + (skillsRef.current?.offsetHeight ?? currentViewportHeight)
+          + (experienceRef.current?.offsetHeight ?? currentViewportHeight)
+          + (projectsRef.current?.offsetHeight ?? currentViewportHeight)
+          + (contactRef.current?.offsetHeight ?? currentViewportHeight),
         currentViewportHeight,
       );
 
@@ -82,8 +101,20 @@ function HomePage() {
       resizeObserver.observe(aboutRef.current);
     }
 
+    if (skillsRef.current && resizeObserver) {
+      resizeObserver.observe(skillsRef.current);
+    }
+
     if (experienceRef.current && resizeObserver) {
       resizeObserver.observe(experienceRef.current);
+    }
+
+    if (projectsRef.current && resizeObserver) {
+      resizeObserver.observe(projectsRef.current);
+    }
+
+    if (contactRef.current && resizeObserver) {
+      resizeObserver.observe(contactRef.current);
     }
 
     window.addEventListener('scroll', updateOverlapScroll, { passive: true });
@@ -199,7 +230,10 @@ function HomePage() {
 
   const effectiveViewportHeight = viewportHeight || 0;
   const measuredAboutHeight = aboutHeight || effectiveViewportHeight || 0;
+  const measuredSkillsHeight = skillsHeight || effectiveViewportHeight || 0;
   const measuredExperienceHeight = experienceHeight || effectiveViewportHeight || 0;
+  const measuredProjectsHeight = projectsHeight || effectiveViewportHeight || 0;
+  const measuredContactHeight = contactHeight || effectiveViewportHeight || 0;
 
   const transitionDistance = effectiveViewportHeight || 1;
   const scrollProgress = clamp(overlapScroll / transitionDistance, 0, 1);
@@ -211,23 +245,43 @@ function HomePage() {
     -aboutOverflowDistance,
     effectiveViewportHeight,
   );
-  const experienceOverflowDistance = Math.max(measuredExperienceHeight - effectiveViewportHeight, 0);
-  const experienceTranslateY = clamp(
+  const skillsOverflowDistance = Math.max(measuredSkillsHeight - effectiveViewportHeight, 0);
+  const skillsTranslateY = clamp(
     effectiveViewportHeight + measuredAboutHeight - overlapScroll,
-    -experienceOverflowDistance,
+    -skillsOverflowDistance,
     effectiveViewportHeight + measuredAboutHeight,
   );
-  const overlapSceneHeight = effectiveViewportHeight + measuredAboutHeight + measuredExperienceHeight;
+  const experienceOverflowDistance = Math.max(measuredExperienceHeight - effectiveViewportHeight, 0);
+  const experienceTranslateY = clamp(
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - overlapScroll,
+    -experienceOverflowDistance,
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight,
+  );
+  const projectsOverflowDistance = Math.max(measuredProjectsHeight - effectiveViewportHeight, 0);
+  const projectsTranslateY = clamp(
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - overlapScroll,
+    -projectsOverflowDistance,
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight,
+  );
+  const contactOverflowDistance = Math.max(measuredContactHeight - effectiveViewportHeight, 0);
+  const contactTranslateY = clamp(
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - overlapScroll,
+    -contactOverflowDistance,
+    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight,
+  );
+  const overlapSceneHeight = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight + measuredContactHeight;
   
 
   return (
-    <div className={`relative z-[1] min-h-screen bg-dark-800 text-gray-200 ${isMounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+    <div className={`min-h-screen bg-dark-800 text-gray-200 ${isMounted ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <GlobalParticlesBackground />
+      <GlobalSnippets />
       <CustomCursor />
-      <header className="relative z-[1]">
+      <PageDots />
+      <header>
         <Navbar activeSection={activeSection} />
       </header>
-      <main className="relative z-[1]">
+      <main>
         <div
           ref={overlapSceneRef}
           className="relative"
@@ -265,6 +319,20 @@ function HomePage() {
             </div>
 
             <div
+              ref={skillsRef}
+              className="absolute inset-x-0 top-0 z-[15] overflow-hidden rounded-t-[24px]"
+              style={{
+                background: 'var(--color-dark-800, #050d1a)',
+                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
+                transform: `translate3d(0, ${skillsTranslateY}px, 0)`,
+                transition: 'none',
+                willChange: 'transform',
+              }}
+            >
+              <Skills />
+            </div>
+
+            <div
               ref={experienceRef}
               className="absolute inset-x-0 top-0 z-[20] overflow-hidden rounded-t-[24px]"
               style={{
@@ -277,12 +345,35 @@ function HomePage() {
             >
               <Experience />
             </div>
-          </div>
-        </div>
 
-        <div className="relative z-[10]">
-          <Projects />
-          <Contact />
+            <div
+              ref={projectsRef}
+              className="absolute inset-x-0 top-0 z-[30] overflow-hidden rounded-t-[24px]"
+              style={{
+                background: 'var(--color-dark-800, #050d1a)',
+                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
+                transform: `translate3d(0, ${projectsTranslateY}px, 0)`,
+                transition: 'none',
+                willChange: 'transform',
+              }}
+            >
+              <Projects />
+            </div>
+
+            <div
+              ref={contactRef}
+              className="absolute inset-x-0 top-0 z-[40] overflow-hidden rounded-t-[24px]"
+              style={{
+                background: 'var(--color-dark-800, #050d1a)',
+                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
+                transform: `translate3d(0, ${contactTranslateY}px, 0)`,
+                transition: 'none',
+                willChange: 'transform',
+              }}
+            >
+              <Contact />
+            </div>
+          </div>
         </div>
       </main>
       <Footer visits={count} />
@@ -290,7 +381,6 @@ function HomePage() {
       
       <style jsx global>{`
         section,
-        header,
         footer {
           position: relative;
           z-index: 1;
@@ -323,13 +413,20 @@ function HomePage() {
   );
 }
 
+function ScrollRestorationWrapper({ children }: { children: React.ReactNode }) {
+  useScrollRestoration();
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-      </Routes>
+      <ScrollRestorationWrapper>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+        </Routes>
+      </ScrollRestorationWrapper>
     </Router>
   );
 }

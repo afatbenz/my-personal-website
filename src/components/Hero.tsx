@@ -9,7 +9,20 @@ import {
   Download,
   Network,
 } from 'lucide-react';
-import { Link } from 'react-scroll';
+
+// Custom scroll handler - consistent across all components
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (!element) return;
+  const navbarHeight = 80;
+  const rect = element.getBoundingClientRect();
+  const absoluteTop = window.scrollY + rect.top;
+  const targetScroll = Math.max(absoluteTop - navbarHeight, 0);
+  window.scrollTo({
+    top: targetScroll,
+    behavior: 'smooth',
+  });
+};
 
 type Token = {
   cls?: string;
@@ -29,16 +42,7 @@ type TechItem = {
   icon: React.ComponentType<{ className?: string; size?: number | string }>;
 };
 
-const HERO_SNIPPETS = [
-  { text: 'const api = createService();', top: '10%', left: '56%', delay: '0s' },
-  { text: 'SELECT * FROM systems;', top: '24%', left: '9%', delay: '1.5s' },
-  { text: 'docker compose up -d', top: '41%', left: '58%', delay: '0.8s' },
-  { text: 'await optimizeDatabase();', top: '63%', left: '6%', delay: '2.2s' },
-  { text: 'service.status = "healthy";', top: '76%', left: '54%', delay: '1.1s' },
-];
-
 const EDGE_LABELS = ['API', 'DATABASE', 'MICROSERVICES', 'PERFORMANCE'];
-
 const TECH_STACK: TechItem[] = [
   { label: 'Microservices', icon: Network },
   { label: 'Code Quality', icon: Braces },
@@ -46,7 +50,6 @@ const TECH_STACK: TechItem[] = [
   { label: 'Docker', icon: Box },
   { label: 'AWS', icon: Cloud },
 ];
-
 const DEVELOPER_NAME = 'Muhammad Nurdin Mafaticul Fuadi';
 const ROTATING_ROLES = [
   'Software Engineer',
@@ -555,24 +558,6 @@ const Hero: React.FC = () => {
             animation: heroWidgetEnter 1s ease-out 0.15s forwards;
           }
 
-          .hero-code-snippet {
-            position: absolute;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.78rem;
-            color: rgba(148, 163, 184, 0.13);
-            letter-spacing: 0.04em;
-            white-space: nowrap;
-            animation: heroCodeDrift 10s ease-in-out infinite alternate;
-          }
-
-          .hero-left-dot {
-            height: 10px;
-            width: 10px;
-            border-radius: 9999px;
-            background: #00bfff;
-            box-shadow: 0 0 0 6px rgba(0, 191, 255, 0.08), 0 0 18px rgba(0, 191, 255, 0.55);
-          }
-
           .hero-vertical-label {
             writing-mode: vertical-rl;
             transform: rotate(180deg);
@@ -825,11 +810,6 @@ const Hero: React.FC = () => {
           }
 
           @media (max-width: 640px) {
-            .hero-code-snippet {
-              font-size: 0.64rem;
-              opacity: 0.7;
-            }
-
             .ide-widget {
               border-radius: 22px;
             }
@@ -867,35 +847,7 @@ const Hero: React.FC = () => {
         `}
       </style>
 
-      <div className="absolute inset-0 overflow-hidden">
-        {HERO_SNIPPETS.map((snippet) => (
-          <span
-            key={snippet.text}
-            className="hero-code-snippet"
-            style={{ top: snippet.top, left: snippet.left, animationDelay: snippet.delay }}
-          >
-            {snippet.text}
-          </span>
-        ))}
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,191,255,0.08),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.06),transparent_24%)]" />
-      </div>
-
-      <a
-        href="/Mafatichul_Fuadi-Software_Engineer.pdf"
-        download
-        className="fixed bottom-5 left-1/2 z-30 inline-flex w-[calc(100%-2.5rem)] max-w-[240px] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-cyan-300/35 bg-[#081120]/90 px-4 py-3 text-sm font-semibold text-cyan-100 shadow-[0_16px_40px_rgba(2,12,27,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-cyan-200/60 hover:bg-[#0c1a2d] md:absolute md:right-6 md:top-6 md:left-auto md:bottom-auto md:w-auto md:max-w-none md:translate-x-0 md:justify-start md:px-4 md:py-2.5"
-        style={{ animation: 'heroResumeFloat 3.6s ease-in-out infinite' }}
-      >
-        <Download size={16} />
-        <span>Download Resume</span>
-      </a>
-
-      <div className="pointer-events-none absolute left-5 top-1/2 hidden -translate-y-1/2 flex-col gap-4 md:flex">
-        {[0, 1, 2, 3].map((dot) => (
-          <span key={dot} className="hero-left-dot" />
-        ))}
-      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,191,255,0.08),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.06),transparent_24%)]" />
 
       <div className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 gap-4 xl:flex">
         {EDGE_LABELS.map((label) => (
@@ -930,28 +882,20 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-start">
-              <Link
-                to="projects"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={800}
+              <button
+                onClick={() => scrollToSection('projects')}
                 className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-[#04111f] shadow-[0_10px_30px_rgba(0,191,255,0.25)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
                 style={{ backgroundColor: '#00bfff' }}
               >
                 <span>View My Work</span>
                 <ArrowRight size={18} />
-              </Link>
-              <Link
-                to="contact"
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={800}
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
                 className="inline-flex w-full cursor-pointer items-center justify-center rounded-xl border border-white/25 bg-[#0a1423] px-6 py-3.5 text-base font-semibold text-white transition-colors duration-300 hover:border-cyan-300/40 hover:bg-white/5 sm:w-auto"
               >
                 Contact Me
-              </Link>
+              </button>
             </div>
 
             <div className="hero-tech-scroll mt-10 flex max-w-full gap-3 overflow-x-auto pb-2">
@@ -1028,17 +972,13 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="pointer-events-none absolute bottom-24 left-1/2 -translate-x-1/2 sm:bottom-9">
-          <Link
-            to="about"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={800}
+          <button
+            onClick={() => scrollToSection('about')}
             className="pointer-events-auto inline-flex cursor-pointer items-center justify-center rounded-full border border-cyan-300/20 bg-cyan-400/5 p-3 text-cyan-300/90"
             style={{ animation: 'heroArrowPulse 2.2s ease-in-out infinite' }}
           >
             <ArrowDown size={26} />
-          </Link>
+          </button>
         </div>
       </div>
     </section>

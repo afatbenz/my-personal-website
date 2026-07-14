@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { experiences } from '../data/profileData';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 
+const EXP_EDGE_LABELS = ['RELIABILITY', 'SCALABILITY', 'LEADERSHIP', 'QUALITY'];
+
 const CARD_GAP = 24;
 const MOBILE_CARD_GAP = 16;
 const MAX_VISIBLE_BULLETS = 10;
@@ -231,8 +233,28 @@ const Experience: React.FC = () => {
     : -1;
 
   return (
-    <section id="experience" className="experience-section relative z-[1] overflow-hidden py-20">
-      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
+    <section id="experience" className="experience-section relative z-[1] overflow-hidden py-20" style={{ backgroundColor: '#050d1a' }}>
+      <style>
+        {`
+          .exp-vertical-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            letter-spacing: 0.35em;
+          }
+        `}
+      </style>
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,191,255,0.08),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.06),transparent_24%)]" />
+
+      <div className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 gap-4 xl:flex">
+        {EXP_EDGE_LABELS.map((label) => (
+          <span key={label} className="exp-vertical-label text-xs font-semibold text-cyan-300/30">
+            {label}
+          </span>
+        ))}
+      </div>
+
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto relative z-10">
         {/* Heading */}
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -259,7 +281,7 @@ const Experience: React.FC = () => {
           {/* Track wrapper */}
           <div
             ref={viewportRef}
-            className={`slider-wrapper${isDragging ? ' dragging' : ''}`}
+            className={`slider-wrapper pt-1 ${isDragging ? ' dragging' : ''}`}
             onWheel={handleWheel}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
