@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const SECTION_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+
 export const useScrollPosition = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
@@ -8,27 +10,45 @@ export const useScrollPosition = () => {
     const handleScroll = () => {
       const position = window.scrollY;
       setScrollPosition(position);
-      
-      const sections = Array.from(document.querySelectorAll('section[id]')) as HTMLElement[];
-      const triggerLine = 120;
-      let nextActiveSection = 'home';
 
-      for (const section of sections) {
-        const rect = section.getBoundingClientRect();
-        const sectionId = section.getAttribute('id') || '';
+      const vh = window.innerHeight;
+      const navbarHeight = 80;
+      const triggerY = position + navbarHeight;
 
-        if (rect.top <= triggerLine && rect.bottom > triggerLine) {
-          nextActiveSection = sectionId;
-          break;
+      let accumulated = 0;
+
+      for (let i = 0; i < SECTION_IDS.length; i++) {
+        const sectionId = SECTION_IDS[i];
+        const el = document.getElementById(sectionId);
+
+        if (i === 0) {
+          // Hero always occupies the first viewport height
+          accumulated = vh;
+          if (triggerY < vh) {
+            setActiveSection(sectionId);
+            return;
+          }
+          continue;
         }
+
+        const sectionHeight = el?.offsetHeight ?? vh;
+        const sectionEnd = accumulated + sectionHeight;
+
+        if (triggerY >= accumulated && triggerY < sectionEnd) {
+          setActiveSection(sectionId);
+          return;
+        }
+
+        accumulated = sectionEnd;
       }
 
-      setActiveSection(nextActiveSection);
+      // If we've scrolled past all sections, activate the last one
+      setActiveSection(SECTION_IDS[SECTION_IDS.length - 1]);
     };
 
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

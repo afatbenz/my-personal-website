@@ -53,7 +53,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
             transition={{ duration: 0.3, type: "spring", damping: 25 }}
             className="bg-dark-700 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto"
           >
-            <div className="p-6">
+            <div className="p-6 rounded-2xl">
               <div className="flex justify-between items-start mb-6">
                 <motion.h3 
                   initial={{ opacity: 0, x: -20 }}

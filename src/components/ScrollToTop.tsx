@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
-import { animateScroll as scroll } from 'react-scroll';
 
 const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,9 +18,9 @@ const ScrollToTop: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    scroll.scrollToTop({
-      duration: 800,
-      smooth: 'easeInOutQuart'
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
     });
   };
 

@@ -1,22 +1,21 @@
 import React from 'react';
-import { Link } from 'react-scroll';
 import { Github as GitHub, Linkedin, Twitter, ArrowUp, Instagram } from 'lucide-react';
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
 const Footer: React.FC<{ visits: number }> = ({ visits }) => {
   return (
-    <footer id="footer" className="relative z-[1] bg-dark-900 pt-12 pb-8">
+    <footer id="footer" className="relative z-[1] bg-black pt-12 pb-8">
       <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="flex flex-col items-center">
-          <Link
-            to="home"
-            spy={true}
-            smooth={true}
-            offset={-70}
-            duration={500}
+          <button
+            onClick={scrollToTop}
             className="bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-full mb-8 cursor-pointer transition-all"
           >
             <ArrowUp size={20} />
-          </Link>
+          </button>
 
           <div className="flex space-x-6 mb-8">
             <a 
