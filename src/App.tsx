@@ -306,10 +306,8 @@ function HomePage() {
 
             <div
               ref={aboutRef}
-              className="absolute inset-x-0 top-0 z-[10] overflow-hidden rounded-t-[24px]"
+              className="absolute inset-x-0 top-0 z-[10] overflow-hidden"
               style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
                 transform: `translate3d(0, ${aboutTranslateY}px, 0)`,
                 transition: 'none',
                 willChange: 'transform',
@@ -320,10 +318,8 @@ function HomePage() {
 
             <div
               ref={skillsRef}
-              className="absolute inset-x-0 top-0 z-[15] overflow-hidden rounded-t-[24px]"
+              className="absolute inset-x-0 top-0 z-[15] overflow-hidden"
               style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
                 transform: `translate3d(0, ${skillsTranslateY}px, 0)`,
                 transition: 'none',
                 willChange: 'transform',
@@ -334,10 +330,8 @@ function HomePage() {
 
             <div
               ref={experienceRef}
-              className="absolute inset-x-0 top-0 z-[20] overflow-hidden rounded-t-[24px]"
+              className="absolute inset-x-0 top-0 z-[20] overflow-hidden"
               style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
                 transform: `translate3d(0, ${experienceTranslateY}px, 0)`,
                 transition: 'none',
                 willChange: 'transform',
@@ -348,10 +342,8 @@ function HomePage() {
 
             <div
               ref={projectsRef}
-              className="absolute inset-x-0 top-0 z-[30] overflow-hidden rounded-t-[24px]"
+              className="absolute inset-x-0 top-0 z-[30] overflow-hidden"
               style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
                 transform: `translate3d(0, ${projectsTranslateY}px, 0)`,
                 transition: 'none',
                 willChange: 'transform',
@@ -362,10 +354,8 @@ function HomePage() {
 
             <div
               ref={contactRef}
-              className="absolute inset-x-0 top-0 z-[40] overflow-hidden rounded-t-[24px]"
+              className="absolute inset-x-0 top-0 z-[40] overflow-hidden"
               style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
                 transform: `translate3d(0, ${contactTranslateY}px, 0)`,
                 transition: 'none',
                 willChange: 'transform',
