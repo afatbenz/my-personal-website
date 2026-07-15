@@ -98,24 +98,22 @@ const AngularIcon = () => (
   </svg>
 );
 
-const DotNetIcon = () => (
+const CSharpIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
     <rect x="2" y="2" width="20" height="20" rx="4" fill="#512BD4" />
-    <text x="12" y="15.5" textAnchor="middle" fontSize="6.5" fontWeight="700" fill="#ffffff" fontFamily="sans-serif">
-      .NET
+    <text x="12" y="15.5" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#ffffff" fontFamily="sans-serif">
+      C#
     </text>
   </svg>
 );
 
 
 const LANGUAGE_SKILLS: SkillMetric[] = [
-  { name: 'Javascript', years: 7, width: 96, icon: <NodeIcon /> },
+  { name: 'JavaScript', years: 7, width: 96, icon: <NodeIcon /> },
   { name: 'TypeScript', years: 5, width: 67, icon: <TypeScriptIcon /> },
-  { name: 'React', years: 5, width: 67, icon: <ReactIcon /> },
   { name: 'PHP', years: 3, width: 43, icon: <PhpIcon /> },
   { name: 'Go', years: 3, width: 43, icon: <GoIcon /> },
-  { name: 'Angular', years: 0.8, width: 11, icon: <AngularIcon /> },
-  { name: '.NET', years: 0.8, width: 11, icon: <DotNetIcon /> },
+  { name: 'C#', years: 0.8, width: 11, icon: <CSharpIcon /> },
 ];
 
 const SKILL_CATEGORIES: SkillCategory[] = [
@@ -123,7 +121,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Backend Engineering',
     colorClass: 'text-[#00bfff]',
     icon: <Server size={22} />,
-    items: ['Node.js', 'Go', 'PHP', 'TypeScript', '.NET', 'REST API', 'Micro-services'],
+    items: ['Node.js', 'Go Fiber', 'PHP Native', 'TypeScript', '.NET', 'Express JS', 'Nest JS', 'Hapi JS', 'Micro-services'],
   },
   {
     title: 'Frontend Development',
@@ -207,7 +205,7 @@ const Skills: React.FC = () => {
               <h3 className="text-lg font-bold text-white">Programming Languages</h3>
             </div>
 
-            <div className="mt-8 space-y-5">
+            <div className="mt-12 space-y-8">
               {LANGUAGE_SKILLS.map((skill) => (
                 <div key={skill.name}>
                   <div className="flex items-center justify-between gap-4">
