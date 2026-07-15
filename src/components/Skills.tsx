@@ -98,31 +98,24 @@ const AngularIcon = () => (
   </svg>
 );
 
-const SqlIcon = () => (
+const DotNetIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-    <ellipse cx="12" cy="6.5" rx="6.5" ry="2.8" fill="#22d3ee" />
-    <path d="M5.5 6.5v4.1c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8V6.5" fill="#22d3ee" opacity="0.9" />
-    <path d="M5.5 10.8v4.1c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-4.1" fill="#22d3ee" opacity="0.75" />
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="#512BD4" />
+    <text x="12" y="15.5" textAnchor="middle" fontSize="6.5" fontWeight="700" fill="#ffffff" fontFamily="sans-serif">
+      .NET
+    </text>
   </svg>
 );
 
-const MongoIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-    <path
-      d="M12.4 3.2c2.2 2.6 3.7 5.6 3.7 8.8 0 3.8-2 6.7-4.1 8.8-2-2-4-5-4-8.8 0-3.2 1.5-6.2 3.7-8.8l.4 1.9.3-1.9Z"
-      fill="#4CAF50"
-    />
-    <path d="M12 4.4c.8 2.3 1.2 4.8 1.2 7.4 0 2.6-.4 5.1-1.2 7.4-.8-2.3-1.2-4.8-1.2-7.4 0-2.6.4-5.1 1.2-7.4Z" fill="#e5fbe7" opacity="0.7" />
-  </svg>
-);
 
 const LANGUAGE_SKILLS: SkillMetric[] = [
-  { name: 'Node.js', years: 6, width: 86, icon: <NodeIcon /> },
-  { name: 'Go', years: 2, width: 29, icon: <GoIcon /> },
+  { name: 'Javascript', years: 7, width: 96, icon: <NodeIcon /> },
+  { name: 'TypeScript', years: 5, width: 67, icon: <TypeScriptIcon /> },
+  { name: 'React', years: 5, width: 67, icon: <ReactIcon /> },
   { name: 'PHP', years: 3, width: 43, icon: <PhpIcon /> },
-  { name: 'TypeScript', years: 4, width: 57, icon: <TypeScriptIcon /> },
-  { name: 'React', years: 4, width: 57, icon: <ReactIcon /> },
+  { name: 'Go', years: 3, width: 43, icon: <GoIcon /> },
   { name: 'Angular', years: 0.8, width: 11, icon: <AngularIcon /> },
+  { name: '.NET', years: 0.8, width: 11, icon: <DotNetIcon /> },
 ];
 
 const SKILL_CATEGORIES: SkillCategory[] = [
@@ -202,9 +195,6 @@ const Skills: React.FC = () => {
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-white md:text-[40px]">
             Skills &amp; Technologies
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
-            Technologies and tools I use to build scalable and reliable solutions.
-          </p>
           <div className="mt-5 h-0.5 w-12 rounded-full bg-[#00bfff]" />
         </div>
 
