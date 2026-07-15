@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type AboutSlide = {
   titleBefore: string;
@@ -38,6 +38,13 @@ const ABOUT_SLIDES: AboutSlide[] = [
 
 const About: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % ABOUT_SLIDES.length);
+    }, 4000);
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <section id="about" className="relative z-[1] h-screen overflow-hidden bg-[#0c0416] py-24">
@@ -80,7 +87,7 @@ const About: React.FC = () => {
             {ABOUT_SLIDES.map((slide, index) => (
               <div
                 key={`${slide.titleBefore}-${slide.titleHighlight}`}
-                className={`absolute inset-0 px-6 py-8 transition-all duration-500 md:px-10 md:py-10 ${
+                className={`absolute inset-0 px-6 py-8 transition-all duration-200 md:px-10 md:py-10 ${
                   index === currentSlide
                     ? 'translate-y-0 opacity-100'
                     : 'pointer-events-none translate-y-3 opacity-0'
