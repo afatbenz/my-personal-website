@@ -60,7 +60,7 @@ const About: React.FC = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-2 md:px-12 lg:px-20">
-        <div className="mx-auto max-w-4xl py-12 text-center">
+        <div className="mx-auto max-w-4xl py-6 text-center">
           <div className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#00bfff]">
             <span>&lt;/&gt;</span>
             <span>About Me</span>
@@ -73,10 +73,10 @@ const About: React.FC = () => {
           <img
             src="/avatar.png"
             alt="Mafatichul Fuadi"
-            className="mx-auto mt-10 h-48 w-48 object-cover"
+            className="mx-auto mt-10 h-56 w-56 object-cover"
           />
 
-          <div className="relative mt-2 min-h-[190px] px-6 py-2 backdrop-blur-sm sm:min-h-[168px] md:px-10 md:py-10">
+          <div className="relative min-h-[190px] px-6 py-2 backdrop-blur-sm sm:min-h-[168px] md:px-10 md:py-10">
             {ABOUT_SLIDES.map((slide, index) => (
               <div
                 key={`${slide.titleBefore}-${slide.titleHighlight}`}

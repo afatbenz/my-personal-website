@@ -272,7 +272,7 @@ const Experience: React.FC = () => {
           <button
             type="button"
             onClick={goPrev}
-            className={`slider-nav-btn prev-btn ${currentSlide <= 0 ? 'disabled' : ''}`}
+            className={`slider-nav-btn ml-2 prev-btn ${currentSlide <= 0 ? 'disabled' : ''}`}
             aria-label="Previous slide"
           >
             <ChevronLeft size={20} />
@@ -347,7 +347,7 @@ const Experience: React.FC = () => {
           <button
             type="button"
             onClick={goNext}
-            className={`slider-nav-btn next-btn ${currentSlide >= totalSlides - 1 ? 'disabled' : ''}`}
+            className={`slider-nav-btn next-btn mr-2 ${currentSlide >= totalSlides - 1 ? 'disabled' : ''}`}
             aria-label="Next slide"
           >
             <ChevronRight size={20} />
