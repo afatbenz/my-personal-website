@@ -42,7 +42,7 @@ const About: React.FC = () => {
   useEffect(() => {
     const interval = window.setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % ABOUT_SLIDES.length);
-    }, 4000);
+    }, 5000);
     return () => window.clearInterval(interval);
   }, []);
 

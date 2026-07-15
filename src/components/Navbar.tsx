@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   return (
     <nav
       className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${
-        isScrolled ? 'bg-dark-950 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-dark-900 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="container px-6 md:px-12 lg:px-20 mx-auto flex justify-between items-center">
