@@ -121,13 +121,14 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Backend Engineering',
     colorClass: 'text-[#00bfff]',
     icon: <Server size={22} />,
-    items: ['Node.js', 'Go Fiber', 'PHP Native', 'TypeScript', '.NET', 'Express JS', 'Nest JS', 'Hapi JS', 'Micro-services'],
+    items: ['Node.js', 'Go Fiber', 'PHP Native', 'TypeScript', '.NET', 'Express JS', 'Nest JS', 'Hapi JS', 'Micro-services', 'Rest API', 'Messages Queue'],
+    fullWidth: true,
   },
   {
     title: 'Frontend Development',
     colorClass: 'text-[#00bfff]',
     icon: <Code2 size={22} />,
-    items: ['React', 'Angular', 'HTML', 'CSS', 'TypeScript'],
+    items: ['React', 'Angular', 'HTML', 'CSS', 'TypeScript', 'State Management'],
   },
   {
     title: 'Databases & Caching',
@@ -139,7 +140,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Cloud & Infrastructure',
     colorClass: 'text-[#fb923c]',
     icon: <Cloud size={22} />,
-    items: ['AWS (EKS, EC2, ECR)', 'Docker', 'Kubernetes', 'CI/CD'],
+    items: ['AWS (EKS, EC2, ECR)', 'Docker', 'Kubernetes', 'CI/CD', 'API Gateway'],
   },
   {
     title: 'Testing & Observability',
