@@ -121,7 +121,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Backend Engineering',
     colorClass: 'text-[#00bfff]',
     icon: <Server size={22} />,
-    items: ['Node.js', 'Go Fiber', 'PHP Native', 'TypeScript', '.NET', 'Express JS', 'Nest JS', 'Hapi JS', 'Micro-services', 'Rest API', 'Messages Queue'],
+    items: ['Node.js', 'TypeScript', 'Express JS', 'Nest JS', 'Hapi JS', 'Go Fiber', 'PHP Native', 'Laravel', '.NET', 'Micro-services', 'Rest API', 'Messages Queue'],
     fullWidth: true,
   },
   {
@@ -147,7 +147,6 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     colorClass: 'text-[#f43f5e]',
     icon: <BarChart3 size={22} />,
     items: ['Jest', 'Mocha', 'SonarQube', 'Kibana', 'Splunk'],
-    fullWidth: true,
   },
 ];
 
