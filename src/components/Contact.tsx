@@ -54,7 +54,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="relative z-[1] overflow-hidden py-20" style={{ backgroundColor: '#030712' }}>
+    <section id="contact" className="relative z-[1] overflow-hidden py-20">
       <style>
         {`
           .contact-vertical-label {

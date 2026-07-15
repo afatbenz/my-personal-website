@@ -239,36 +239,42 @@ function HomePage() {
   const scrollProgress = clamp(overlapScroll / transitionDistance, 0, 1);
   const heroOpacity = clamp(1 - scrollProgress * 1.4, 0, 1);
   const heroScale = 1 - scrollProgress * 0.06;
-  const aboutOverflowDistance = Math.max(measuredAboutHeight - effectiveViewportHeight, 0);
-  const aboutTranslateY = clamp(
-    effectiveViewportHeight - overlapScroll,
-    -aboutOverflowDistance,
-    effectiveViewportHeight,
-  );
-  const skillsOverflowDistance = Math.max(measuredSkillsHeight - effectiveViewportHeight, 0);
-  const skillsTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight - overlapScroll,
-    -skillsOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight,
-  );
-  const experienceOverflowDistance = Math.max(measuredExperienceHeight - effectiveViewportHeight, 0);
-  const experienceTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - overlapScroll,
-    -experienceOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight,
-  );
-  const projectsOverflowDistance = Math.max(measuredProjectsHeight - effectiveViewportHeight, 0);
-  const projectsTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - overlapScroll,
-    -projectsOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight,
-  );
-  const contactOverflowDistance = Math.max(measuredContactHeight - effectiveViewportHeight, 0);
-  const contactTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - overlapScroll,
-    -contactOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight,
-  );
+
+  // Crossfade helpers: section fades in during first half, fades out during second half
+  const crossfade = (scroll: number, vh: number) => {
+    const normalized = clamp(scroll / vh, 0, 1);
+    const progress = normalized * 2;
+    return clamp(progress <= 1 ? progress : 2 - progress, 0, 1);
+  };
+
+  // Content translateY: slides up 20% of viewport during transition
+  const contentSlide = (scroll: number, vh: number) => {
+    const normalized = clamp(scroll / vh, 0, 1);
+    const progress = normalized * 2;
+    const slide = clamp(progress <= 1 ? progress : 2 - progress, 0, 1);
+    return (1 - slide) * vh * 0.2;
+  };
+
+  const aboutScroll = clamp(overlapScroll - effectiveViewportHeight, 0, measuredAboutHeight);
+  const aboutOpacity = crossfade(aboutScroll, measuredAboutHeight);
+  const aboutContentY = contentSlide(aboutScroll, measuredAboutHeight);
+
+  const skillsScroll = clamp(overlapScroll - effectiveViewportHeight - measuredAboutHeight, 0, measuredSkillsHeight);
+  const skillsOpacity = crossfade(skillsScroll, measuredSkillsHeight);
+  const skillsContentY = contentSlide(skillsScroll, measuredSkillsHeight);
+
+  const experienceScroll = clamp(overlapScroll - effectiveViewportHeight - measuredAboutHeight - measuredSkillsHeight, 0, measuredExperienceHeight);
+  const experienceOpacity = crossfade(experienceScroll, measuredExperienceHeight);
+  const experienceContentY = contentSlide(experienceScroll, measuredExperienceHeight);
+
+  const projectsScroll = clamp(overlapScroll - effectiveViewportHeight - measuredAboutHeight - measuredSkillsHeight - measuredExperienceHeight, 0, measuredProjectsHeight);
+  const projectsOpacity = crossfade(projectsScroll, measuredProjectsHeight);
+  const projectsContentY = contentSlide(projectsScroll, measuredProjectsHeight);
+
+  const contactScroll = clamp(overlapScroll - effectiveViewportHeight - measuredAboutHeight - measuredSkillsHeight - measuredExperienceHeight - measuredProjectsHeight, 0, measuredContactHeight);
+  const contactOpacity = crossfade(contactScroll, measuredContactHeight);
+  const contactContentY = contentSlide(contactScroll, measuredContactHeight);
+
   const overlapSceneHeight = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight + measuredContactHeight;
   
 
@@ -306,62 +312,92 @@ function HomePage() {
 
             <div
               ref={aboutRef}
-              className="absolute inset-x-0 top-0 z-[10] overflow-hidden"
+              className="absolute inset-x-0 top-0 z-[10]"
               style={{
-                transform: `translate3d(0, ${aboutTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
+                opacity: aboutOpacity,
+                willChange: 'opacity',
               }}
             >
-              <About />
+              <div
+                style={{
+                  transform: `translate3d(0, ${aboutContentY}px, 0)`,
+                  willChange: 'transform',
+                }}
+              >
+                <About />
+              </div>
             </div>
 
             <div
               ref={skillsRef}
-              className="absolute inset-x-0 top-0 z-[15] overflow-hidden"
+              className="absolute inset-x-0 top-0 z-[15]"
               style={{
-                transform: `translate3d(0, ${skillsTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
+                opacity: skillsOpacity,
+                willChange: 'opacity',
               }}
             >
-              <Skills />
+              <div
+                style={{
+                  transform: `translate3d(0, ${skillsContentY}px, 0)`,
+                  willChange: 'transform',
+                }}
+              >
+                <Skills />
+              </div>
             </div>
 
             <div
               ref={experienceRef}
-              className="absolute inset-x-0 top-0 z-[20] overflow-hidden"
+              className="absolute inset-x-0 top-0 z-[20]"
               style={{
-                transform: `translate3d(0, ${experienceTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
+                opacity: experienceOpacity,
+                willChange: 'opacity',
               }}
             >
-              <Experience />
+              <div
+                style={{
+                  transform: `translate3d(0, ${experienceContentY}px, 0)`,
+                  willChange: 'transform',
+                }}
+              >
+                <Experience />
+              </div>
             </div>
 
             <div
               ref={projectsRef}
-              className="absolute inset-x-0 top-0 z-[30] overflow-hidden"
+              className="absolute inset-x-0 top-0 z-[30]"
               style={{
-                transform: `translate3d(0, ${projectsTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
+                opacity: projectsOpacity,
+                willChange: 'opacity',
               }}
             >
-              <Projects />
+              <div
+                style={{
+                  transform: `translate3d(0, ${projectsContentY}px, 0)`,
+                  willChange: 'transform',
+                }}
+              >
+                <Projects />
+              </div>
             </div>
 
             <div
               ref={contactRef}
-              className="absolute inset-x-0 top-0 z-[40] overflow-hidden"
+              className="absolute inset-x-0 top-0 z-[40]"
               style={{
-                transform: `translate3d(0, ${contactTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
+                opacity: contactOpacity,
+                willChange: 'opacity',
               }}
             >
-              <Contact />
+              <div
+                style={{
+                  transform: `translate3d(0, ${contactContentY}px, 0)`,
+                  willChange: 'transform',
+                }}
+              >
+                <Contact />
+              </div>
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" className="relative z-[1] h-screen overflow-hidden bg-[#0c0416] py-24">
+    <section id="about" className="relative z-[1] h-screen overflow-hidden py-24">
       <style>
         {`
           .about-vertical-label {
