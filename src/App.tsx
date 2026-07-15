@@ -235,40 +235,57 @@ function HomePage() {
   const measuredProjectsHeight = projectsHeight || effectiveViewportHeight || 0;
   const measuredContactHeight = contactHeight || effectiveViewportHeight || 0;
 
-  const transitionDistance = effectiveViewportHeight || 1;
-  const scrollProgress = clamp(overlapScroll / transitionDistance, 0, 1);
-  const heroOpacity = clamp(1 - scrollProgress * 1.4, 0, 1);
-  const heroScale = 1 - scrollProgress * 0.06;
-  const aboutOverflowDistance = Math.max(measuredAboutHeight - effectiveViewportHeight, 0);
-  const aboutTranslateY = clamp(
-    effectiveViewportHeight - overlapScroll,
-    -aboutOverflowDistance,
-    effectiveViewportHeight,
-  );
-  const skillsOverflowDistance = Math.max(measuredSkillsHeight - effectiveViewportHeight, 0);
-  const skillsTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight - overlapScroll,
-    -skillsOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight,
-  );
-  const experienceOverflowDistance = Math.max(measuredExperienceHeight - effectiveViewportHeight, 0);
-  const experienceTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - overlapScroll,
-    -experienceOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight,
-  );
-  const projectsOverflowDistance = Math.max(measuredProjectsHeight - effectiveViewportHeight, 0);
-  const projectsTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - overlapScroll,
-    -projectsOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight,
-  );
-  const contactOverflowDistance = Math.max(measuredContactHeight - effectiveViewportHeight, 0);
-  const contactTranslateY = clamp(
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - overlapScroll,
-    -contactOverflowDistance,
-    effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight,
-  );
+  // Fade duration: 50% of viewport height on mobile, 30% on desktop
+  const FADE_DURATION = effectiveViewportHeight < 768 ? 0.5 : 0.3;
+  const fadeAmount = Math.max(effectiveViewportHeight * FADE_DURATION, 1);
+
+  const heroScale = 1 - clamp(overlapScroll / effectiveViewportHeight, 0, 1) * 0.06;
+
+  // Hero fades out over [vh - fadeAmt, vh]
+  const heroOpacity = clamp((effectiveViewportHeight - overlapScroll) / fadeAmount, 0, 1);
+
+  // Each section: fade in over first fadeAmount, stays full, then fades out over last fadeAmount
+  // Handles short sections (height < 2× fadeAmount) gracefully
+  const sectionFade = (sectionScroll: number, sectionHeight: number) => {
+    const halfFade = Math.min(fadeAmount, sectionHeight / 2);
+    const fadeIn = clamp(sectionScroll / halfFade, 0, 1);
+    const fadeOut = clamp((sectionHeight - sectionScroll) / halfFade, 0, 1);
+    return Math.min(fadeIn, fadeOut);
+  };
+
+  // Content slides up only during fade-in
+  const sectionSlide = (sectionScroll: number) => {
+    return clamp(1 - sectionScroll / fadeAmount, 0, 1) * effectiveViewportHeight * 0.15;
+  };
+
+  const aboutStart = effectiveViewportHeight - fadeAmount;
+  const aboutScroll = clamp(overlapScroll - aboutStart, 0, measuredAboutHeight);
+  const aboutOpacity = sectionFade(aboutScroll, measuredAboutHeight);
+  const aboutContentY = sectionSlide(aboutScroll);
+
+  const skillsStart = effectiveViewportHeight + measuredAboutHeight - fadeAmount;
+  const skillsScroll = clamp(overlapScroll - skillsStart, 0, measuredSkillsHeight);
+  const skillsOpacity = sectionFade(skillsScroll, measuredSkillsHeight);
+  const skillsContentY = sectionSlide(skillsScroll);
+
+  const experienceStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - fadeAmount;
+  const experienceScroll = clamp(overlapScroll - experienceStart, 0, measuredExperienceHeight);
+  const experienceOpacity = sectionFade(experienceScroll, measuredExperienceHeight);
+  const experienceContentY = sectionSlide(experienceScroll);
+
+  const projectsStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - fadeAmount;
+  const projectsScroll = clamp(overlapScroll - projectsStart, 0, measuredProjectsHeight);
+  const projectsOpacity = sectionFade(projectsScroll, measuredProjectsHeight);
+  const projectsContentY = sectionSlide(projectsScroll);
+
+  const contactStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - fadeAmount;
+  const contactScroll = clamp(overlapScroll - contactStart, 0, measuredContactHeight);
+  const contactOpacity = sectionFade(contactScroll, measuredContactHeight);
+  const contactContentY = sectionSlide(contactScroll);
+
+  // Section receives pointer events when opacity >= 0.5 (higher z-index wins during overlap)
+  const pe = (o: number) => o >= 0.5 ? 'auto' as const : 'none' as const;
+
   const overlapSceneHeight = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight + measuredContactHeight;
   
 
@@ -289,7 +306,7 @@ function HomePage() {
         >
           <div
             ref={heroRef}
-            className="sticky top-0 h-screen overflow-hidden"
+            className="sticky top-0 h-screen"
           >
             <div
               className="absolute inset-0 z-[1]"
@@ -306,72 +323,52 @@ function HomePage() {
 
             <div
               ref={aboutRef}
-              className="absolute inset-x-0 top-0 z-[10] overflow-hidden rounded-t-[24px]"
-              style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
-                transform: `translate3d(0, ${aboutTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
-              }}
+              className="absolute inset-x-0 top-0 z-[10] screen-overflow"
+              style={{ opacity: aboutOpacity, pointerEvents: pe(aboutOpacity), willChange: 'opacity' }}
             >
-              <About />
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${aboutContentY}px, 0)`, willChange: 'transform' }}>
+                <About />
+              </div>
             </div>
 
             <div
               ref={skillsRef}
-              className="absolute inset-x-0 top-0 z-[15] overflow-hidden rounded-t-[24px]"
-              style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
-                transform: `translate3d(0, ${skillsTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
-              }}
+              className="absolute inset-x-0 top-0 z-[15] screen-overflow"
+              style={{ opacity: skillsOpacity, pointerEvents: pe(skillsOpacity), willChange: 'opacity' }}
             >
-              <Skills />
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${skillsContentY}px, 0)`, willChange: 'transform' }}>
+                <Skills />
+              </div>
             </div>
 
             <div
               ref={experienceRef}
-              className="absolute inset-x-0 top-0 z-[20] overflow-hidden rounded-t-[24px]"
-              style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
-                transform: `translate3d(0, ${experienceTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
-              }}
+              className="absolute inset-x-0 top-0 z-[20] screen-overflow"
+              style={{ opacity: experienceOpacity, pointerEvents: pe(experienceOpacity), willChange: 'opacity' }}
             >
-              <Experience />
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${experienceContentY}px, 0)`, willChange: 'transform' }}>
+                <Experience />
+              </div>
             </div>
 
             <div
               ref={projectsRef}
-              className="absolute inset-x-0 top-0 z-[30] overflow-hidden rounded-t-[24px]"
-              style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
-                transform: `translate3d(0, ${projectsTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
-              }}
+              className="absolute inset-x-0 top-0 z-[30] screen-overflow"
+              style={{ opacity: projectsOpacity, pointerEvents: pe(projectsOpacity), willChange: 'opacity' }}
             >
-              <Projects />
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${projectsContentY}px, 0)`, willChange: 'transform' }}>
+                <Projects />
+              </div>
             </div>
 
             <div
               ref={contactRef}
-              className="absolute inset-x-0 top-0 z-[40] overflow-hidden rounded-t-[24px]"
-              style={{
-                background: 'var(--color-dark-800, #050d1a)',
-                boxShadow: '0 -20px 60px rgba(0, 191, 255, 0.08)',
-                transform: `translate3d(0, ${contactTranslateY}px, 0)`,
-                transition: 'none',
-                willChange: 'transform',
-              }}
+              className="absolute inset-x-0 top-0 z-[40] screen-overflow"
+              style={{ opacity: contactOpacity, pointerEvents: pe(contactOpacity), willChange: 'opacity' }}
             >
-              <Contact />
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${contactContentY}px, 0)`, willChange: 'transform' }}>
+                <Contact />
+              </div>
             </div>
           </div>
         </div>
@@ -384,6 +381,17 @@ function HomePage() {
         footer {
           position: relative;
           z-index: 1;
+        }
+
+        /* Each overlap section fills the viewport and scrolls its overflow content */
+        .screen-overflow {
+          max-height: 100vh;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .screen-overflow .scroll-inner {
+          min-height: 100vh;
         }
 
         ::-webkit-scrollbar {

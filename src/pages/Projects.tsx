@@ -20,8 +20,9 @@ const ProjectsPage: React.FC = () => {
     const loadProjects = async () => {
       try {
         const data = await fetchProjects();
-        setProjects(data);
-        setFilteredProjects(data);
+        const sorted = [...data].sort((a, b) => b.id - a.id);
+        setProjects(sorted);
+        setFilteredProjects(sorted);
       } catch (error) {
         console.error('Error loading projects:', error);
       } finally {
@@ -52,7 +53,7 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-dark-800 py-20">
-      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
+      <div className="container px-6 md:px-12 lg:px-40 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

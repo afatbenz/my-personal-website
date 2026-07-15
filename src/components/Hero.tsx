@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowDown,
-  ArrowRight,
   Box,
   Braces,
   Cloud,
   Database,
-  Download,
+  Hammer,
   Network,
 } from 'lucide-react';
 
@@ -48,7 +47,8 @@ const TECH_STACK: TechItem[] = [
   { label: 'Code Quality', icon: Braces },
   { label: 'Databases', icon: Database },
   { label: 'Docker', icon: Box },
-  { label: 'AWS', icon: Cloud },
+  { label: 'Cloud', icon: Cloud },
+  { label: 'Architecture', icon: Hammer },
 ];
 const DEVELOPER_NAME = 'Muhammad Nurdin Mafaticul Fuadi';
 const ROTATING_ROLES = [
@@ -468,11 +468,11 @@ const TerminalWidget: React.FC = () => {
 };
 
 const TechBadge: React.FC<TechItem> = ({ icon: Icon, label }) => (
-  <div className="min-w-[92px] shrink-0 rounded-2xl border border-[rgba(99,179,237,0.2)] bg-[#111827] px-4 py-3 text-center shadow-[0_0_25px_rgba(0,191,255,0.08)]">
-    <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-[rgba(148,163,184,0.15)] bg-[#0b1320]">
-      <Icon className="text-white/90" size={20} />
+  <div className="w-[100%] min-w-0 shrink-0 rounded-2xl border border-[rgba(99,179,237,0.2)] bg-[#111827] px-3 py-2 text-center shadow-[0_0_25px_rgba(0,191,255,0.08)] sm:min-w-[92px] sm:w-[120px] sm:px-4 sm:py-3 mb-2 mr-2">
+    <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-xl border border-[rgba(148,163,184,0.15)] bg-[#0b1320] sm:h-11 sm:w-11">
+      <Icon className="h-4 w-4 text-white/90 sm:h-5 sm:w-5" />
     </div>
-    <span className="mt-3 block text-xs font-medium text-slate-300">{label}</span>
+    <span className="mt-1.5 block truncate text-[11px] font-medium text-slate-300 sm:mt-3 sm:text-xs">{label}</span>
   </div>
 );
 
@@ -869,19 +869,19 @@ const Hero: React.FC = () => {
               </span>
             </h1>
 
-            <div className="mt-6 inline-flex max-w-full items-center justify-center rounded-full border border-violet-400/20 bg-violet-500/5 px-4 py-2 font-mono text-base text-[#a855f7] sm:text-lg lg:justify-start">
+            <div className="mt-2 lg:mt-6 inline-flex max-w-full items-center justify-center rounded-full border border-violet-400/20 bg-violet-500/5 px-4 py-2 font-mono text-base text-[#a855f7] sm:text-lg lg:justify-start">
               <span>{displayedRole}</span>
               <span className="hero-role-cursor ml-1">|</span>
             </div>
 
-            <p className="mt-8 max-w-full text-[0.96rem] leading-7 text-slate-300 sm:max-w-[36rem] sm:text-[1.02rem] sm:leading-8">
+            <p className="mt-8 max-w-full text-[0.85rem] leading-7 text-slate-300 sm:max-w-[36rem] sm:text-[1.02rem] sm:leading-8">
               <span className="block">
-                Software Engineer with <span style={{ color: '#00bfff' }}>7+ years</span> of experience building
+                Software Engineer with <span style={{ color: '#00bfff' }}>7+ years</span> of experience
               </span>
-              <span className="block">scalable back-end systems and enterprise applications. Specialized in designing high-performance APIs, microservices architecture, and database optimization.</span>
+              <span className="block">building scalable back-end systems and enterprise applications. Specialized in designing high-performance APIs, AI-spec driven, microservices architecture, and database optimization.</span>
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-start">
+            {/* <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-start">
               <button
                 onClick={() => scrollToSection('projects')}
                 className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-[#04111f] shadow-[0_10px_30px_rgba(0,191,255,0.25)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
@@ -896,9 +896,9 @@ const Hero: React.FC = () => {
               >
                 Contact Me
               </button>
-            </div>
+            </div> */}
 
-            <div className="hero-tech-scroll mt-10 flex max-w-full gap-3 overflow-x-auto pb-2">
+            <div className="mt-10 grid grid-cols-3 justify-items-center gap-2 sm:grid sm:grid-cols-4 sm:gap-1 lg:pr-16">
               {TECH_STACK.map((item) => (
                 <TechBadge key={item.label} {...item} />
               ))}

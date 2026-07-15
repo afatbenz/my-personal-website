@@ -190,7 +190,7 @@ const Skills: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="skills" className="relative z-[1] bg-[#11061f] py-24">
+    <section ref={sectionRef} id="skills" className="relative z-[1] py-24" style={{ backgroundColor: '#11061f' }}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255, 255, 43, 0.8),transparent_0%),radial-gradient(circle_at_bottom_right,rgba(7, 7, 18, 0.93),transparent_98%)]" />
 
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">

@@ -10,8 +10,8 @@ const ABOUT_EDGE_LABELS = ['INTEGRITY', 'OWNERSHIP', 'COLLABORATION', 'LEADERSHI
 
 const ABOUT_SLIDES: AboutSlide[] = [
   {
-    titleBefore: 'I turn ideas into ',
-    titleHighlight: 'scalable solutions.',
+    titleBefore: 'Turn Ideas Into ',
+    titleHighlight: 'Scalable Solutions.',
     text: 'Strong foundation in backend development, implement reliable and scalable business system.',
   },
   {
@@ -47,7 +47,7 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" className="relative z-[1] h-screen overflow-hidden bg-[#0c0416] py-24">
+    <section id="about" className="relative z-[1] h-screen overflow-hidden py-24" style={{ backgroundColor: '#0c0416' }}>
       <style>
         {`
           .about-vertical-label {
@@ -67,7 +67,7 @@ const About: React.FC = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-2 md:px-12 lg:px-20">
-        <div className="mx-auto max-w-4xl py-6 text-center">
+        <div className="mx-auto max-w-4xl py-2 lg:py-6 text-center">
           <div className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#00bfff]">
             <span>&lt;/&gt;</span>
             <span>About Me</span>
@@ -106,7 +106,7 @@ const About: React.FC = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-[5rem] left-0 right-0 z-20 flex items-center justify-center gap-2">
+      <div className="absolute bottom-[5rem] left-0 right-0 z-20 hidden sm:flex items-center justify-center gap-2">
         {ABOUT_SLIDES.map((slide, index) => (
           <button
             key={`dot-${slide.titleHighlight}`}
