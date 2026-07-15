@@ -41,11 +41,12 @@ function HomePage() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
+    document.documentElement.style.scrollTimeline = 'auto';
     setIsMounted(true);
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
-    
+
   }, []);
 
   useEffect(() => {
@@ -235,50 +236,50 @@ function HomePage() {
   const measuredProjectsHeight = projectsHeight || effectiveViewportHeight || 0;
   const measuredContactHeight = contactHeight || effectiveViewportHeight || 0;
 
-  // Fade duration: 50% of viewport height on mobile, 30% on desktop
-  const FADE_DURATION = effectiveViewportHeight < 768 ? 0.5 : 0.3;
-  const fadeAmount = Math.max(effectiveViewportHeight * FADE_DURATION, 1);
-
+  // --- HERO FADE (slow, independent) ---
+  const heroFadeRatio = effectiveViewportHeight < 768 ? 0.5 : 0.3;
+  const heroFadeAmount = Math.max(effectiveViewportHeight * heroFadeRatio, 1);
   const heroScale = 1 - clamp(overlapScroll / effectiveViewportHeight, 0, 1) * 0.06;
+  const heroOpacity = clamp((effectiveViewportHeight - overlapScroll) / heroFadeAmount, 0, 1);
 
-  // Hero fades out over [vh - fadeAmt, vh]
-  const heroOpacity = clamp((effectiveViewportHeight - overlapScroll) / fadeAmount, 0, 1);
+  // --- SECTION CROSSFADE (fast, 15% of vh) ---
+  const sectionFadeRatio = 0.15;
+  const sectionFadeAmt = Math.max(effectiveViewportHeight * sectionFadeRatio, 1);
 
-  // Each section: fade in over first fadeAmount, stays full, then fades out over last fadeAmount
-  // Handles short sections (height < 2× fadeAmount) gracefully
-  const sectionFade = (sectionScroll: number, sectionHeight: number) => {
-    const halfFade = Math.min(fadeAmount, sectionHeight / 2);
-    const fadeIn = clamp(sectionScroll / halfFade, 0, 1);
-    const fadeOut = clamp((sectionHeight - sectionScroll) / halfFade, 0, 1);
-    return Math.min(fadeIn, fadeOut);
+  // Section fades in over first sectionFadeAmt, stays full, fades out over last sectionFadeAmt
+  const sectionFade = (sScroll: number, sHeight: number) => {
+    const hf = Math.min(sectionFadeAmt, sHeight / 2);
+    return Math.min(clamp(sScroll / hf, 0, 1), clamp((sHeight - sScroll) / hf, 0, 1));
   };
 
-  // Content slides up only during fade-in
-  const sectionSlide = (sectionScroll: number) => {
-    return clamp(1 - sectionScroll / fadeAmount, 0, 1) * effectiveViewportHeight * 0.15;
+  // Content slides up only during fade-in zone
+  const sectionSlide = (sScroll: number) => {
+    if (sScroll >= sectionFadeAmt) return 0;
+    return (1 - sScroll / sectionFadeAmt) * effectiveViewportHeight * 0.15;
   };
 
-  const aboutStart = effectiveViewportHeight - fadeAmount;
+  // Each section starts fading in sectionFadeAmt before its "scroll target"
+  const aboutStart = effectiveViewportHeight - sectionFadeAmt;
   const aboutScroll = clamp(overlapScroll - aboutStart, 0, measuredAboutHeight);
   const aboutOpacity = sectionFade(aboutScroll, measuredAboutHeight);
   const aboutContentY = sectionSlide(aboutScroll);
 
-  const skillsStart = effectiveViewportHeight + measuredAboutHeight - fadeAmount;
+  const skillsStart = effectiveViewportHeight + measuredAboutHeight - sectionFadeAmt;
   const skillsScroll = clamp(overlapScroll - skillsStart, 0, measuredSkillsHeight);
   const skillsOpacity = sectionFade(skillsScroll, measuredSkillsHeight);
   const skillsContentY = sectionSlide(skillsScroll);
 
-  const experienceStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - fadeAmount;
+  const experienceStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight - sectionFadeAmt;
   const experienceScroll = clamp(overlapScroll - experienceStart, 0, measuredExperienceHeight);
   const experienceOpacity = sectionFade(experienceScroll, measuredExperienceHeight);
   const experienceContentY = sectionSlide(experienceScroll);
 
-  const projectsStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - fadeAmount;
+  const projectsStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight - sectionFadeAmt;
   const projectsScroll = clamp(overlapScroll - projectsStart, 0, measuredProjectsHeight);
   const projectsOpacity = sectionFade(projectsScroll, measuredProjectsHeight);
   const projectsContentY = sectionSlide(projectsScroll);
 
-  const contactStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - fadeAmount;
+  const contactStart = effectiveViewportHeight + measuredAboutHeight + measuredSkillsHeight + measuredExperienceHeight + measuredProjectsHeight - sectionFadeAmt;
   const contactScroll = clamp(overlapScroll - contactStart, 0, measuredContactHeight);
   const contactOpacity = sectionFade(contactScroll, measuredContactHeight);
   const contactContentY = sectionSlide(contactScroll);
@@ -314,7 +315,7 @@ function HomePage() {
                 opacity: heroOpacity,
                 transform: `scale(${heroScale})`,
                 transformOrigin: 'center top',
-                transition: 'none',
+                transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
                 willChange: 'transform, opacity',
               }}
             >
@@ -324,9 +325,9 @@ function HomePage() {
             <div
               ref={aboutRef}
               className="absolute inset-x-0 top-0 z-[10] screen-overflow"
-              style={{ opacity: aboutOpacity, pointerEvents: pe(aboutOpacity), willChange: 'opacity' }}
+              style={{ opacity: aboutOpacity, pointerEvents: pe(aboutOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${aboutContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${aboutContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <About />
               </div>
             </div>
@@ -334,9 +335,9 @@ function HomePage() {
             <div
               ref={skillsRef}
               className="absolute inset-x-0 top-0 z-[15] screen-overflow"
-              style={{ opacity: skillsOpacity, pointerEvents: pe(skillsOpacity), willChange: 'opacity' }}
+              style={{ opacity: skillsOpacity, pointerEvents: pe(skillsOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${skillsContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${skillsContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Skills />
               </div>
             </div>
@@ -344,9 +345,9 @@ function HomePage() {
             <div
               ref={experienceRef}
               className="absolute inset-x-0 top-0 z-[20] screen-overflow"
-              style={{ opacity: experienceOpacity, pointerEvents: pe(experienceOpacity), willChange: 'opacity' }}
+              style={{ opacity: experienceOpacity, pointerEvents: pe(experienceOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${experienceContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${experienceContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Experience />
               </div>
             </div>
@@ -354,9 +355,9 @@ function HomePage() {
             <div
               ref={projectsRef}
               className="absolute inset-x-0 top-0 z-[30] screen-overflow"
-              style={{ opacity: projectsOpacity, pointerEvents: pe(projectsOpacity), willChange: 'opacity' }}
+              style={{ opacity: projectsOpacity, pointerEvents: pe(projectsOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${projectsContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${projectsContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Projects />
               </div>
             </div>
@@ -364,9 +365,9 @@ function HomePage() {
             <div
               ref={contactRef}
               className="absolute inset-x-0 top-0 z-[40] screen-overflow"
-              style={{ opacity: contactOpacity, pointerEvents: pe(contactOpacity), willChange: 'opacity' }}
+              style={{ opacity: contactOpacity, pointerEvents: pe(contactOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${contactContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${contactContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Contact />
               </div>
             </div>

@@ -863,9 +863,9 @@ const Hero: React.FC = () => {
             <h1 className="text-[2.25rem] font-extrabold leading-[0.98] tracking-tight text-white sm:text-[3rem] lg:text-[4.5rem]">
               <span className="block">Muhammad Nurdin</span>
               <span className="mt-2 block">
-                M
-                <span style={{ color: '#00bfff' }}>afatic</span>
-                hul Fuadi
+                Ma
+                <span style={{ color: '#00bfff' }}>fatich</span>
+                ul Fuadi
               </span>
             </h1>
 
