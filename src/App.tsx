@@ -41,11 +41,12 @@ function HomePage() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
+    document.documentElement.style.scrollTimeline = 'auto';
     setIsMounted(true);
     return () => {
       document.documentElement.style.scrollBehavior = '';
     };
-    
+
   }, []);
 
   useEffect(() => {
@@ -314,7 +315,7 @@ function HomePage() {
                 opacity: heroOpacity,
                 transform: `scale(${heroScale})`,
                 transformOrigin: 'center top',
-                transition: 'none',
+                transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
                 willChange: 'transform, opacity',
               }}
             >
@@ -324,9 +325,9 @@ function HomePage() {
             <div
               ref={aboutRef}
               className="absolute inset-x-0 top-0 z-[10] screen-overflow"
-              style={{ opacity: aboutOpacity, pointerEvents: pe(aboutOpacity), willChange: 'opacity' }}
+              style={{ opacity: aboutOpacity, pointerEvents: pe(aboutOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${aboutContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${aboutContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <About />
               </div>
             </div>
@@ -334,9 +335,9 @@ function HomePage() {
             <div
               ref={skillsRef}
               className="absolute inset-x-0 top-0 z-[15] screen-overflow"
-              style={{ opacity: skillsOpacity, pointerEvents: pe(skillsOpacity), willChange: 'opacity' }}
+              style={{ opacity: skillsOpacity, pointerEvents: pe(skillsOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${skillsContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${skillsContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Skills />
               </div>
             </div>
@@ -344,9 +345,9 @@ function HomePage() {
             <div
               ref={experienceRef}
               className="absolute inset-x-0 top-0 z-[20] screen-overflow"
-              style={{ opacity: experienceOpacity, pointerEvents: pe(experienceOpacity), willChange: 'opacity' }}
+              style={{ opacity: experienceOpacity, pointerEvents: pe(experienceOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${experienceContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${experienceContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Experience />
               </div>
             </div>
@@ -354,9 +355,9 @@ function HomePage() {
             <div
               ref={projectsRef}
               className="absolute inset-x-0 top-0 z-[30] screen-overflow"
-              style={{ opacity: projectsOpacity, pointerEvents: pe(projectsOpacity), willChange: 'opacity' }}
+              style={{ opacity: projectsOpacity, pointerEvents: pe(projectsOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${projectsContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${projectsContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Projects />
               </div>
             </div>
@@ -364,9 +365,9 @@ function HomePage() {
             <div
               ref={contactRef}
               className="absolute inset-x-0 top-0 z-[40] screen-overflow"
-              style={{ opacity: contactOpacity, pointerEvents: pe(contactOpacity), willChange: 'opacity' }}
+              style={{ opacity: contactOpacity, pointerEvents: pe(contactOpacity), transition: 'opacity 0.3s ease-out', willChange: 'opacity' }}
             >
-              <div className="scroll-inner" style={{ transform: `translate3d(0, ${contactContentY}px, 0)`, willChange: 'transform' }}>
+              <div className="scroll-inner" style={{ transform: `translate3d(0, ${contactContentY}px, 0)`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}>
                 <Contact />
               </div>
             </div>
