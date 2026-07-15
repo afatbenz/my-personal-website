@@ -387,26 +387,17 @@ function HomePage() {
         }
 
         ::-webkit-scrollbar {
-          width: 10px;
+          display: none;
         }
         
-        ::-webkit-scrollbar-track {
-          background: #0c1426;
+        /* Hide scrollbar for Firefox */
+        * {
+          scrollbar-width: none;
         }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #0369a1;
-          border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: #0ea5e9;
-        }
-        
-        @media (max-width: 768px) {
-          ::-webkit-scrollbar {
-            width: 5px;
-          }
+
+        /* Hide scrollbar for IE/Edge */
+        * {
+          -ms-overflow-style: none;
         }
       `}</style>
     </div>
