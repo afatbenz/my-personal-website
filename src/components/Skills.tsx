@@ -98,31 +98,22 @@ const AngularIcon = () => (
   </svg>
 );
 
-const SqlIcon = () => (
+const CSharpIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-    <ellipse cx="12" cy="6.5" rx="6.5" ry="2.8" fill="#22d3ee" />
-    <path d="M5.5 6.5v4.1c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8V6.5" fill="#22d3ee" opacity="0.9" />
-    <path d="M5.5 10.8v4.1c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-4.1" fill="#22d3ee" opacity="0.75" />
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="#512BD4" />
+    <text x="12" y="15.5" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#ffffff" fontFamily="sans-serif">
+      C#
+    </text>
   </svg>
 );
 
-const MongoIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-    <path
-      d="M12.4 3.2c2.2 2.6 3.7 5.6 3.7 8.8 0 3.8-2 6.7-4.1 8.8-2-2-4-5-4-8.8 0-3.2 1.5-6.2 3.7-8.8l.4 1.9.3-1.9Z"
-      fill="#4CAF50"
-    />
-    <path d="M12 4.4c.8 2.3 1.2 4.8 1.2 7.4 0 2.6-.4 5.1-1.2 7.4-.8-2.3-1.2-4.8-1.2-7.4 0-2.6.4-5.1 1.2-7.4Z" fill="#e5fbe7" opacity="0.7" />
-  </svg>
-);
 
 const LANGUAGE_SKILLS: SkillMetric[] = [
-  { name: 'Node.js', years: 6, width: 86, icon: <NodeIcon /> },
-  { name: 'Go', years: 2, width: 29, icon: <GoIcon /> },
+  { name: 'JavaScript', years: 7, width: 96, icon: <NodeIcon /> },
+  { name: 'TypeScript', years: 5, width: 67, icon: <TypeScriptIcon /> },
   { name: 'PHP', years: 3, width: 43, icon: <PhpIcon /> },
-  { name: 'TypeScript', years: 4, width: 57, icon: <TypeScriptIcon /> },
-  { name: 'React', years: 4, width: 57, icon: <ReactIcon /> },
-  { name: 'Angular', years: 0.8, width: 11, icon: <AngularIcon /> },
+  { name: 'Go', years: 3, width: 43, icon: <GoIcon /> },
+  { name: 'C#', years: 0.8, width: 11, icon: <CSharpIcon /> },
 ];
 
 const SKILL_CATEGORIES: SkillCategory[] = [
@@ -130,13 +121,14 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Backend Engineering',
     colorClass: 'text-[#00bfff]',
     icon: <Server size={22} />,
-    items: ['Node.js', 'Go', 'PHP', 'TypeScript', '.NET', 'REST API', 'Micro-services'],
+    items: ['Node.js', 'TypeScript', 'Express JS', 'Nest JS', 'Hapi JS', 'Go Fiber', 'PHP Native', 'Laravel', '.NET', 'Micro-services', 'Rest API', 'Messages Queue'],
+    fullWidth: true,
   },
   {
     title: 'Frontend Development',
     colorClass: 'text-[#00bfff]',
     icon: <Code2 size={22} />,
-    items: ['React', 'Angular', 'HTML', 'CSS', 'TypeScript'],
+    items: ['React', 'Angular', 'HTML', 'CSS', 'TypeScript', 'State Management'],
   },
   {
     title: 'Databases & Caching',
@@ -148,14 +140,13 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     title: 'Cloud & Infrastructure',
     colorClass: 'text-[#fb923c]',
     icon: <Cloud size={22} />,
-    items: ['AWS (EKS, EC2, ECR)', 'Docker', 'Kubernetes', 'CI/CD'],
+    items: ['AWS (EKS, EC2, ECR)', 'Docker', 'Kubernetes', 'CI/CD', 'API Gateway'],
   },
   {
     title: 'Testing & Observability',
     colorClass: 'text-[#f43f5e]',
     icon: <BarChart3 size={22} />,
     items: ['Jest', 'Mocha', 'SonarQube', 'Kibana', 'Splunk'],
-    fullWidth: true,
   },
 ];
 
@@ -202,9 +193,6 @@ const Skills: React.FC = () => {
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-white md:text-[40px]">
             Skills &amp; Technologies
           </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-400">
-            Technologies and tools I use to build scalable and reliable solutions.
-          </p>
           <div className="mt-5 h-0.5 w-12 rounded-full bg-[#00bfff]" />
         </div>
 
@@ -217,7 +205,7 @@ const Skills: React.FC = () => {
               <h3 className="text-lg font-bold text-white">Programming Languages</h3>
             </div>
 
-            <div className="mt-8 space-y-5">
+            <div className="mt-12 space-y-8">
               {LANGUAGE_SKILLS.map((skill) => (
                 <div key={skill.name}>
                   <div className="flex items-center justify-between gap-4">

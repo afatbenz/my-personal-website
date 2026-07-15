@@ -80,7 +80,7 @@ const About: React.FC = () => {
           <img
             src="/avatar.png"
             alt="Mafatichul Fuadi"
-            className="mx-auto mt-10 h-56 w-56 object-cover"
+            className="mx-auto mt-10 h-48 w-48 lg:h-56 lg:w-56 object-cover"
           />
 
           <div className="relative min-h-[190px] px-6 py-2 backdrop-blur-sm sm:min-h-[168px] md:px-10 md:py-10">
