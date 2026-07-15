@@ -8,27 +8,27 @@ const CONTACT_EDGE_LABELS = ['EMAIL', 'PHONE', 'SOCIAL', 'OPPORTUNITIES'];
 const Contact: React.FC = () => {
   const contactItems = [
     {
-      icon: <Mail className="text-primary-400" size={24} />,
+      icon: <Mail className="text-xs sm:text-sm text-primary-400" />,
       label: 'Email',
       value: personalInfo.email,
       link: `mailto:${personalInfo.email}`,
       delay: 0.1
     },
     {
-      icon: <Phone className="text-primary-400" size={24} />,
-      label: 'Phone',
+      icon: <Phone className="text-xs sm:text-sm text-primary-400" />,
+      label: 'WhatsApp',
       value: personalInfo.phone,
-      link: `tel:${personalInfo.phone}`,
+      link: `https://wa.me/6281335884729`,
       delay: 0.2
     },
     {
-      icon: <MapPin className="text-primary-400" size={24} />,
+      icon: <MapPin className="text-xs sm:text-sm text-primary-400" />,
       label: 'Location',
       value: personalInfo.location,
       delay: 0.3
     },
     {
-      icon: <Linkedin className="text-primary-400" size={24} />,
+      icon: <Linkedin className="text-xs sm:text-sm text-primary-400" size={24} />,
       label: 'LinkedIn',
       value: 'Connect with me',
       link: 'https://www.linkedin.com/in/mafatichulfuadi',
@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
       delay: 0.4
     },
     {
-      icon: <Github className="text-primary-400" size={24} />,
+      icon: <Github className="text-xs sm:text-sm text-primary-400" size={24} />,
       label: 'GitHub',
       value: 'View my repositories',
       link: 'https://github.com/afatbenz',
@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
       delay: 0.5
     },
     {
-      icon: <Instagram className="text-primary-400" size={24} />,
+      icon: <Instagram className="text-xs sm:text-sm text-primary-400" size={24} />,
       label: 'Instagram',
       value: 'Follow me',
       link: 'https://www.instagram.com/mafatichulfuadi',
@@ -54,7 +54,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="relative z-[1] overflow-hidden py-20">
+    <section id="contact" className="relative z-[1] min-h-screen py-20" style={{ backgroundColor: '#030712' }}>
       <style>
         {`
           .contact-vertical-label {
@@ -75,7 +75,7 @@ const Contact: React.FC = () => {
         ))}
       </div>
 
-      <div className="container px-6 md:px-12 lg:px-20 mx-auto relative z-10">
+      <div className="container px-6 md:px-12 lg:px-20 mx-auto relative z-10 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,8 +90,8 @@ const Contact: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-4xl mx-auto lg:mt-10 lg:pt-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:mt-10">
             {contactItems.map((item, index) => (
               <motion.div
                 key={index}
@@ -99,26 +99,26 @@ const Contact: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: item.delay }}
-                className="group relative bg-dark-800 rounded-lg p-6 hover:bg-dark-900 transition-all duration-300"
+                className="group relative bg-dark-800 rounded-lg p-4 sm:p-6 hover:bg-dark-900 transition-all duration-300 overflow-hidden min-w-0"
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-primary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="bg-dark-800 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="flex flex-col items-center text-center min-w-0 w-full">
+                  <div className="bg-dark-800 p-3 sm:p-4 rounded-full mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-200 mb-2">{item.label}</h3>
+                  <h3 className="text-sm sm:text-lg font-semibold text-gray-200 mb-1 sm:mb-2">{item.label}</h3>
                   {item.link ? (
                     <a
                       href={item.link}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
-                      className="text-gray-400 hover:text-primary-400 transition-colors group-hover:text-primary-400 flex items-center gap-2"
+                      className="text-xs sm:text-sm text-gray-400 hover:text-primary-400 transition-colors group-hover:text-primary-400 flex items-center gap-1.5 sm:gap-2 min-w-0 max-w-full"
                     >
-                      {item.value}
-                      {item.external && <ExternalLink size={14} />}
+                      <span className="truncate">{item.value}</span>
+                      {item.external && <ExternalLink size={12} className="shrink-0 sm:size-3.5" />}
                     </a>
                   ) : (
-                    <span className="text-gray-400">{item.value}</span>
+                    <span className="text-xs sm:text-sm text-gray-400 truncate max-w-full">{item.value}</span>
                   )}
                 </div>
               </motion.div>

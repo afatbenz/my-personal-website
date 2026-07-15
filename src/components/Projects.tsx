@@ -51,10 +51,10 @@ const Projects: React.FC = () => {
     const sortedProjects = [...projects].sort((a, b) => b.id - a.id);
 
     if (isMobile) {
-      return sortedProjects.slice(0, 4);
+      return sortedProjects.filter(project => project.display).slice(0, 4);
     }
 
-    return sortedProjects.slice(0, 6);
+    return sortedProjects.filter(project => project.display).slice(0, 6);
   }, [projects, isMobile]);
 
   const handleProjectClick = (project: Project) => {
@@ -66,7 +66,7 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative z-[1] bg-dark-900 py-20">
+    <section id="projects" className="relative z-[1] py-20" style={{ backgroundColor: '#0a0f22' }}>
       <div className="container px-6 md:px-12 lg:px-20 mx-auto">
         <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>

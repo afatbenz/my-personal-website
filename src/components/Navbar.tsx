@@ -6,7 +6,6 @@ interface NavbarProps {
 }
 
 const SECTION_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
-const NAVBAR_HEIGHT = 80;
 
 const scrollToSection = (sectionId: string) => {
   const index = SECTION_IDS.indexOf(sectionId);
@@ -23,8 +22,6 @@ const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(SECTION_IDS[i]);
     scrollTarget += el?.offsetHeight ?? vh;
   }
-
-  scrollTarget = Math.max(scrollTarget - NAVBAR_HEIGHT, 0);
 
   window.scrollTo({
     top: scrollTarget,

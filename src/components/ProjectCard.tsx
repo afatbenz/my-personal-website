@@ -8,11 +8,11 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   return (
-    <div 
-      className="bg-dark-800 rounded-lg overflow-hidden shadow-lg border border-dark-700 hover:border-primary-700 transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+    <div
+      className="bg-dark-800 rounded-lg overflow-hidden shadow-lg border border-blue-900 hover:border-blue-400 transform hover:-translate-y-2 transition-all duration-300 cursor-pointer w-[100%] mx-auto"
       onClick={onClick}
     >
-      <div className="h-48 overflow-hidden">
+      <div className="h-[210px] overflow-hidden">
         <img 
           src={project.thumbnail} 
           alt={project.title} 
@@ -21,7 +21,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       </div>
       <div className="p-5">
         <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-        <p className="text-gray-400 mb-4 h-12 line-clamp-2">{project.description}</p>
+        <p className="text-gray-400 mb-4 h-12 line-clamp-2 text-sm">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech, index) => (
             <span 

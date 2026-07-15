@@ -233,7 +233,7 @@ const Experience: React.FC = () => {
     : -1;
 
   return (
-    <section id="experience" className="experience-section relative z-[1] overflow-hidden py-20">
+    <section id="experience" className="experience-section relative z-[1] overflow-hidden py-20" style={{ backgroundColor: '#050d1a' }}>
       <style>
         {`
           .exp-vertical-label {
