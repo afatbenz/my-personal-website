@@ -384,15 +384,17 @@ function HomePage() {
           z-index: 1;
         }
 
-        /* Each overlap section fills the viewport and scrolls its overflow content */
-        .screen-overflow {
-          max-height: 100vh;
-          overflow-y: auto;
-          -webkit-overflow-scrolling: touch;
-        }
+        /* Each overlap section fills the viewport and scrolls its overflow content (mobile only) */
+        @media (max-width: 640px) {
+          .screen-overflow {
+            max-height: 100vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+          }
 
-        .screen-overflow .scroll-inner {
-          min-height: 100vh;
+          .screen-overflow .scroll-inner {
+            min-height: 100vh;
+          }
         }
 
         ::-webkit-scrollbar {
