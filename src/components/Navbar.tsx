@@ -82,9 +82,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             </button>
           ))}
           <a
-            href="/M.N. Mafatichul Fuadi - Software Engineer.pdf"
+            href="/Mafatichul_Fuadi-Software_Engineer.pdf"
             className="flex items-center gap-2 bg-transparent hover:bg-white/5 border-white text-sm border-[1px] text-white px-4 py-2 rounded-xl transition-all"
-            download="M.N. Mafatichul Fuadi - Software Engineer.pdf"
+            download="Mafatichul_Fuadi-Software_Engineer.pdf"
             rel="noopener noreferrer"
           >
             <Download size={16} />
