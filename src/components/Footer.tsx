@@ -1,67 +1,13 @@
 import React from 'react';
-import { Github as GitHub, Linkedin, Twitter, ArrowUp, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const Footer: React.FC<{ visits: number }> = ({ visits }) => {
-  return (
-    <footer id="footer" className="relative z-[1] bg-black pt-12 pb-8">
-      <div className="container px-6 md:px-12 lg:px-20 mx-auto">
-        <div className="flex flex-col items-center">
-          <button
-            onClick={scrollToTop}
-            className="bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-full mb-8 cursor-pointer transition-all"
-          >
-            <ArrowUp size={20} />
-          </button>
-
-          <div className="flex space-x-6 mb-8">
-            <a 
-              href="https://github.com/afatbenz" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="GitHub"
-            >
-              <GitHub size={22} />
-            </a>
-            <a 
-              href="https://linkedin.com/in/mafatichulfuadi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={22} />
-            </a>
-            <a 
-              href="https://instagram.com/mafatichulfuadi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram size={22} />
-            </a>
-          </div>
-
-          <div className="text-center">
-            <p className="text-gray-500 text-sm">
-              &copy; {new Date().getFullYear()} Mafatichul Fuadi. All rights reserved.
-            </p>
-            <p className="text-gray-600 text-xs mt-1">
-              Built with React, TypeScript, and Tailwind CSS
-            </p>
-            <p className="text-gray-600 text-xs mt-1">
-              Visitors: {visits}
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
+const Footer: React.FC<{ visits: number }> = ({ visits }) => (
+  <footer id="footer" className="relative z-[1] border-t border-slate-200 bg-white py-8 text-slate-500">
+    <div className="mx-auto flex w-[min(1200px,calc(100%-32px))] flex-col items-center justify-between gap-5 text-center text-sm sm:flex-row sm:text-left">
+      <div><p className="font-semibold text-slate-700">Mafatichul Fuadi</p><p className="mt-1 text-xs">Built with React, TypeScript, and Tailwind CSS · Visitors: {visits}</p></div>
+      <div className="flex items-center gap-2"><a href="https://github.com/afatbenz" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-slate-200 hover:border-sky-300 hover:text-sky-700"><Github size={18} /></a><a href="https://linkedin.com/in/mafatichulfuadi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-slate-200 hover:border-sky-300 hover:text-sky-700"><Linkedin size={18} /></a><a href="mailto:mafatichulfuadi@gmail.com" aria-label="Email" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-slate-200 hover:border-sky-300 hover:text-sky-700"><Mail size={18} /></a></div>
+    </div>
+  </footer>
+);
 
 export default Footer;

@@ -52,7 +52,7 @@ const ProjectsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark-800 py-20">
+    <div className="project-archive-page min-h-screen py-20">
       <div className="container px-6 md:px-12 lg:px-40 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,36 +62,36 @@ const ProjectsPage: React.FC = () => {
         >
           <button
             onClick={() => navigate('/')}
-            className="absolute top-8 left-8 text-gray-400 hover:text-white transition-colors flex items-center gap-2"
+            className="absolute left-8 top-8 flex items-center gap-2 text-slate-500 transition-colors hover:text-sky-700"
           >
             <ArrowLeft size={20} />
             Back to Home
           </button>
           
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Project Portfolio</h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">Project Portfolio</h1>
+          <p className="mx-auto max-w-2xl text-slate-500">
             Explore my collection of projects showcasing various technologies and solutions.
           </p>
         </motion.div>
 
         <div className="mb-8 flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-dark-700 border border-dark-600 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="w-full rounded-lg border border-slate-200 bg-white py-3 pl-10 pr-4 text-slate-800 transition-colors focus:border-sky-500 focus:outline-none"
             />
           </div>
           
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
             <select
               value={selectedTech}
               onChange={(e) => setSelectedTech(e.target.value)}
-              className="pl-10 pr-8 py-2 bg-dark-700 border border-dark-600 rounded-lg text-white focus:outline-none focus:border-primary-500 appearance-none cursor-pointer min-w-[200px]"
+              className="min-w-[200px] cursor-pointer appearance-none rounded-lg border border-slate-200 bg-white py-3 pl-10 pr-8 text-slate-800 focus:border-sky-500 focus:outline-none"
             >
               <option value="">All Technologies</option>
               {allTechnologies.map(tech => (
@@ -130,7 +130,7 @@ const ProjectsPage: React.FC = () => {
 
         {filteredProjects.length === 0 && !loading && (
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">No projects found matching your criteria.</p>
+            <p className="text-lg text-slate-500">No projects found matching your criteria.</p>
           </div>
         )}
 

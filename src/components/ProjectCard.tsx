@@ -1,40 +1,23 @@
 import React from 'react';
+import { ArrowUpRight, Folder } from 'lucide-react';
 import { Project } from '../types/types';
 
-interface ProjectCardProps {
-  project: Project;
-  onClick: () => void;
-}
+interface ProjectCardProps { project: Project; onClick: () => void; }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
-  return (
-    <div
-      className="bg-dark-800 rounded-lg overflow-hidden shadow-lg border border-blue-900 hover:border-blue-400 transform hover:-translate-y-2 transition-all duration-300 cursor-pointer w-[100%] mx-auto"
-      onClick={onClick}
-    >
-      <div className="h-[210px] overflow-hidden">
-        <img 
-          src={project.thumbnail} 
-          alt={project.title} 
-          className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-      <div className="p-5">
-        <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-        <p className="text-gray-400 mb-4 h-12 line-clamp-2 text-sm">{project.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech, index) => (
-            <span 
-              key={index} 
-              className="px-2 py-1 bg-dark-700 text-primary-400 rounded-md text-xs"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => (
+  <button type="button" onClick={onClick} className="surface-card group flex h-full min-h-[230px] w-full flex-col text-left transition duration-200 hover:-translate-y-1 hover:border-sky-200 hover:shadow-[0_16px_34px_rgba(2,132,199,.1)]">
+    <div className="relative aspect-[16/9] overflow-hidden rounded-t-[15px] border-b border-slate-100 bg-slate-100">
+      <img
+        src={project.thumbnail}
+        alt={`${project.title} preview`}
+        loading="lazy"
+        className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent" />
     </div>
-  );
-};
+    <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4"><span className="flex items-center gap-2 font-mono text-xs text-slate-500"><Folder size={16} className="text-sky-600" /> project/{project.id}</span><ArrowUpRight size={18} className="text-slate-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sky-600" /></div>
+    <div className="flex flex-1 flex-col p-5"><h3 className="text-lg font-bold tracking-tight text-slate-900">{project.title}</h3><p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">{project.description}</p><div className="mt-auto flex flex-wrap gap-2 pt-5">{project.techStack.slice(0, 5).map((tech) => <span className="pill-tag" key={tech}>{tech}</span>)}</div></div>
+  </button>
+);
 
 export default ProjectCard;
