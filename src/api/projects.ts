@@ -1,7 +1,5 @@
 import { Project } from '../types/types';
 
-const API_URL = 'https://api.example.com/projects';
-
 export async function fetchProjects(): Promise<Project[]> {
   try {
     // Simulated API call

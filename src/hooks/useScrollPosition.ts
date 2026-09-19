@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SECTION_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
 
@@ -7,50 +7,30 @@ export const useScrollPosition = () => {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY;
-      setScrollPosition(position);
+    const sections = SECTION_IDS
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
 
-      const vh = window.innerHeight;
-      const navbarHeight = 80;
-      const triggerY = position + navbarHeight;
+    if (!sections.length) return undefined;
 
-      let accumulated = 0;
+    const updateScrollPosition = () => setScrollPosition(window.scrollY);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visibleEntries[0]) setActiveSection(visibleEntries[0].target.id);
+      },
+      { root: null, rootMargin: '-84px 0px -45% 0px', threshold: [0.15, 0.35, 0.6] },
+    );
 
-      for (let i = 0; i < SECTION_IDS.length; i++) {
-        const sectionId = SECTION_IDS[i];
-        const el = document.getElementById(sectionId);
-
-        if (i === 0) {
-          // Hero always occupies the first viewport height
-          accumulated = vh;
-          if (triggerY < vh) {
-            setActiveSection(sectionId);
-            return;
-          }
-          continue;
-        }
-
-        const sectionHeight = el?.offsetHeight ?? vh;
-        const sectionEnd = accumulated + sectionHeight;
-
-        if (triggerY >= accumulated && triggerY < sectionEnd) {
-          setActiveSection(sectionId);
-          return;
-        }
-
-        accumulated = sectionEnd;
-      }
-
-      // If we've scrolled past all sections, activate the last one
-      setActiveSection(SECTION_IDS[SECTION_IDS.length - 1]);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    sections.forEach((section) => observer.observe(section));
+    updateScrollPosition();
+    window.addEventListener('scroll', updateScrollPosition, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+      window.removeEventListener('scroll', updateScrollPosition);
     };
   }, []);
 

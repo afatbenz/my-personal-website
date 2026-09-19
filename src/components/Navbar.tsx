@@ -1,137 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Download, Menu, Moon, Sun, X } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
-interface NavbarProps {
-  activeSection: string;
-}
+interface NavbarProps { activeSection: string; }
 
 const SECTION_IDS = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
 
 const scrollToSection = (sectionId: string) => {
-  const index = SECTION_IDS.indexOf(sectionId);
-  if (index < 0) return;
-
-  if (index === 0) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return;
-  }
-
-  const vh = window.innerHeight;
-  let scrollTarget = vh;
-  for (let i = 1; i < index; i++) {
-    const el = document.getElementById(SECTION_IDS[i]);
-    scrollTarget += el?.offsetHeight ?? vh;
-  }
-
-  window.scrollTo({
-    top: scrollTarget,
-    behavior: 'smooth',
-  });
+  if (!SECTION_IDS.includes(sectionId)) return;
+  document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
+  const navItems = SECTION_IDS.map((id) => ({ id, label: id[0].toUpperCase() + id.slice(1) }));
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
+  const navigate = (id: string) => {
+    scrollToSection(id);
+    setIsMenuOpen(false);
+  };
+
+  const themeLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${
-        isScrolled ? 'bg-dark-900 bg-opacity-90 backdrop-blur-sm shadow-lg py-3' : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="container px-6 md:px-12 lg:px-20 mx-auto flex justify-between items-center">
-        <button
-          onClick={() => scrollToSection('home')}
-          className="font-mono text-lg font-medium cursor-pointer text-primary-400"
-        >
-          &lt;MF /&gt;
-        </button>
+    <nav className={`site-nav sticky inset-x-0 top-0 z-[9999] border-b transition-all duration-300 ${isScrolled || isMenuOpen ? 'site-nav-scrolled shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur-md' : 'backdrop-blur-sm'}`}>
+      <div className="mx-auto flex h-[68px] w-[min(1200px,calc(100%-32px))] items-center justify-between">
+        <button onClick={() => navigate('home')} className="font-mono text-base font-bold tracking-tight text-sky-700" aria-label="Go to home">&lt;MF /&gt;</button>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className={`relative flex cursor-pointer flex-col items-center transition-all hover:text-primary-400 mt-1 ${
-                activeSection === item.id ? 'font-medium text-white' : 'text-gray-300'
-              }`}
-            >
-              <span>{item.label}</span>
+            <button key={item.id} onClick={() => navigate(item.id)} className={`nav-link relative min-h-11 px-1 text-sm transition-colors ${activeSection === item.id ? 'nav-link-active font-semibold' : ''}`}>
+              {item.label}
+              {activeSection === item.id && <span className="absolute -bottom-[2px] left-1 right-1 h-0.5 rounded-full bg-sky-500" />}
             </button>
           ))}
-          <a
-            href="/Mafatichul_Fuadi-Software_Engineer.pdf"
-            className="flex items-center gap-2 bg-transparent hover:bg-white/5 border-white text-sm border-[1px] text-white px-4 py-2 rounded-xl transition-all"
-            download="Mafatichul_Fuadi-Software_Engineer.pdf"
-            rel="noopener noreferrer"
-          >
-            <Download size={16} />
-            Download Resume
+          <a href="/Mafatichul_Fuadi-Software_Engineer.pdf" download="Mafatichul_Fuadi-Software_Engineer.pdf" className="resume-link inline-flex min-h-11 items-center gap-2 rounded-lg px-3.5 text-sm font-semibold transition-colors">
+            <Download size={16} aria-hidden="true" /> Resume
           </a>
+          <button type="button" onClick={toggleTheme} className="theme-toggle" aria-label={themeLabel} title={themeLabel}>{isDark ? <Sun className="theme-icon" size={18} aria-hidden="true" /> : <Moon className="theme-icon" size={18} aria-hidden="true" />}</button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-300 focus:outline-none"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden"><button type="button" onClick={toggleTheme} className="theme-toggle" aria-label={themeLabel} title={themeLabel}>{isDark ? <Sun className="theme-icon" size={18} aria-hidden="true" /> : <Moon className="theme-icon" size={18} aria-hidden="true" />}</button><button className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-700" onClick={() => setIsMenuOpen((open) => !open)} aria-expanded={isMenuOpen} aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}>
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button></div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed inset-0 bg-dark-800 bg-opacity-95 z-40 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex flex-col items-center justify-center h-full space-y-8">
+      <div className={`mobile-menu border-t px-4 py-4 md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <div className="mx-auto flex max-w-[520px] flex-col gap-1">
           {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => {
-                scrollToSection(item.id);
-                closeMenu();
-              }}
-              className={`text-xl cursor-pointer transition-all hover:text-primary-400 ${
-                activeSection === item.id ? 'text-primary-400 font-medium' : 'text-gray-300'
-              }`}
-            >
-              {item.label}
-            </button>
+            <button key={item.id} onClick={() => navigate(item.id)} className={`mobile-nav-link min-h-11 rounded-lg px-3 text-left text-sm ${activeSection === item.id ? 'mobile-nav-link-active font-semibold' : ''}`}>{item.label}</button>
           ))}
-          <a
-            href="/Mafatichul_Fuadi-Software_Engineer.pdf"
-            className="flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-md transition-all"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Download size={18} />
-            Download Resume
-          </a>
+          <a href="/Mafatichul_Fuadi-Software_Engineer.pdf" download="Mafatichul_Fuadi-Software_Engineer.pdf" className="mt-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-sky-600 px-4 text-sm font-semibold text-white hover:bg-sky-700"><Download size={16} aria-hidden="true" /> Download Resume</a>
         </div>
       </div>
     </nav>

@@ -16,10 +16,15 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
       document.body.style.overflow = 'hidden';
       setCurrentImageIndex(0);
     }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [project]);
+  }, [project, onClose]);
 
   const nextImage = () => {
     if (project) {
@@ -41,7 +46,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) onClose();
           }}
@@ -51,7 +56,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ duration: 0.3, type: "spring", damping: 25 }}
-            className="bg-dark-700 rounded-lg max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+            className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-2xl"
           >
             <div className="p-6 rounded-2xl">
               <div className="flex justify-between items-start mb-6">
@@ -59,13 +64,13 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="text-2xl font-bold text-white"
+                  className="text-2xl font-bold text-slate-900"
                 >
                   {project.title}
                 </motion.h3>
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
                   aria-label="Close dialog"
                 >
                   <X size={24} />
@@ -134,8 +139,8 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                   {/* Right side - Overview and Features */}
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-lg font-semibold mb-2 text-primary-400">Overview</h4>
-                      <p className="text-gray-300">{project.description}</p>
+                      <h4 className="mb-2 text-lg font-semibold text-sky-700">Overview</h4>
+                      <p className="text-slate-600">{project.description}</p>
                     </div>
 
                     <motion.div
@@ -143,8 +148,8 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
                     >
-                      <h4 className="text-lg font-semibold mb-2 text-primary-400">Key Features</h4>
-                      <ul className="list-disc list-inside text-gray-300 space-y-1">
+                      <h4 className="mb-2 text-lg font-semibold text-sky-700">Key Features</h4>
+                      <ul className="list-inside list-disc space-y-1 text-slate-600">
                         {project.features?.map((feature, index) => (
                           <motion.li
                             key={index}
@@ -169,7 +174,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-6 py-3 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                          className="inline-flex items-center rounded-lg bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-sky-700"
                         >
                           View Live Demo
                         </a>
@@ -183,9 +188,9 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="border-t border-dark-600 pt-6"
+                  className="border-t border-slate-200 pt-6"
                 >
-                  <h4 className="text-lg font-semibold mb-2 text-primary-400">Tech Stack</h4>
+                  <h4 className="mb-2 text-lg font-semibold text-sky-700">Tech Stack</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech, index) => (
                       <motion.span
@@ -193,7 +198,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, onClose }) => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.1 * index }}
-                        className="px-3 py-1 bg-dark-600 text-primary-300 rounded-full text-sm"
+                        className="pill-tag"
                       >
                         {tech}
                       </motion.span>
