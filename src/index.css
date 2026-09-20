@@ -98,7 +98,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @keyframes heroAvailabilityFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 @keyframes heroCodeIn { from { opacity: 0; transform: translateY(42px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes heroCodeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-[data-theme='dark'] .hero-section { background: radial-gradient(circle at 70% 35%, rgba(14, 165, 233, .1), transparent 35%), var(--background); }
+[data-theme='dark'] .hero-section { background: linear-gradient(135deg, #020617 0%, #06111f 58%, #0a1929 100%); }
 .experience-shell { display: flex; max-height: 100vh; max-height: 100dvh; flex-direction: column; }
 .experience-header { max-width: 680px; }
 .experience-timeline { position: relative; min-height: 0; width: min(1020px, 100%); margin: 44px auto 0; overflow-x: hidden; overflow-y: auto; padding-right: 14px; overscroll-behavior: contain; scrollbar-color: rgba(2, 132, 199, .55) var(--surface-muted); scrollbar-width: thin; flex: 1 1 auto; }
