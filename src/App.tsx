@@ -88,7 +88,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div className={`app-shell min-h-screen overflow-x-hidden transition-opacity duration-500 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`app-shell min-h-screen overflow-x-hidden pt-[68px] transition-opacity duration-500 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
       <Navbar activeSection={activeSection} />
       <main>
         <Hero />

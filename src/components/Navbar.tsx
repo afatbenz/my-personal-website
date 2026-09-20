@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const themeLabel = isDark ? 'Switch to light mode' : 'Switch to dark mode';
 
   return (
-    <nav className={`site-nav sticky inset-x-0 top-0 z-[9999] border-b transition-all duration-300 ${isScrolled || isMenuOpen ? 'site-nav-scrolled shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur-md' : 'backdrop-blur-sm'}`}>
+    <nav className={`site-nav fixed inset-x-0 top-0 z-[9999] border-b transition-all duration-300 ${isScrolled || isMenuOpen ? 'site-nav-scrolled shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur-md' : 'backdrop-blur-sm'}`}>
       <div className="mx-auto flex h-[68px] w-[min(1200px,calc(100%-32px))] items-center justify-between">
         <button onClick={() => navigate('home')} className="font-mono text-base font-bold tracking-tight text-sky-700" aria-label="Go to home">&lt;MF /&gt;</button>
 
