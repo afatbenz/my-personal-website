@@ -4,12 +4,6 @@ export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'portfolio-theme';
 
-const getSystemTheme = (): Theme => (
-  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light'
-);
-
 export const getInitialTheme = (): Theme => {
   if (typeof document !== 'undefined') {
     const documentTheme = document.documentElement.dataset.theme;
@@ -21,7 +15,7 @@ export const getInitialTheme = (): Theme => {
     if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme;
   }
 
-  return getSystemTheme();
+  return 'light';
 };
 
 const applyTheme = (theme: Theme) => {
