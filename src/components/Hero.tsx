@@ -36,13 +36,13 @@ const Hero: React.FC = () => (
           <a href="https://wa.me/6281335884729" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-sky-300 hover:text-sky-700"><MessageCircle size={18} /></a>
           <span className="hidden h-5 w-px bg-slate-200 sm:block" />
           <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-sky-600" /> {personalInfo.location}</span>
-          <span className="inline-flex items-center gap-2 text-emerald-700"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Available for opportunities</span>
+          <span className="inline-flex items-center gap-2 text-emerald-700"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Available for collaborations</span>
         </div>
       </div>
 
       <div className="relative mx-auto w-full max-w-[520px] lg:justify-self-end">
         <div className="hero-availability hero-availability-enter absolute -right-2 -top-5 z-20 rounded-xl border border-emerald-200 bg-white px-4 py-3 shadow-[0_12px_28px_rgba(15,23,42,.08)] sm:right-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-emerald-700"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Open to opportunities</div>
+          <div className="flex items-center gap-2 text-xs font-bold text-emerald-700"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Open to collaborations</div>
           <p className="mt-1 text-xs text-slate-500">Remote / Hybrid · Indonesia / Overseas</p>
         </div>
         <div className="hero-visual-panel rounded-[22px] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-blue-50 p-5 shadow-[0_24px_60px_rgba(14,116,144,.12)] sm:p-7">
